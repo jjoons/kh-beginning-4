@@ -5,7 +5,7 @@ const tbody = D.querySelector('tbody#addtr')
 
 /** @type {NodeListOf.<HTMLInputElement>} */
 const [id, password, address, phoneNo] = D.querySelectorAll(
-  'input[name="id"], input[name="password"], input[name="address"], input[name="phoneNo"]',
+  'input[name="id"], input[name="password"], input[name="address"], input[name="phoneNo"]'
 )
 
 /** @type {HTMLTableRowElement[]} */
