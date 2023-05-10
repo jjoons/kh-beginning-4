@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이펙트</title>
+    <style>
+      #divBox {
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+        border: 5px solid orange;
+        margin-top: 20px;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+      integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script> -->
+    <script>
+      $(function () {
+        $('#fadeInBtn').on('click', function () {
+          $('#divBox').fadeIn() // id가 "divBox"인 요소를 점점 나타나게 함.
+        })
+        $('#fadeOutBtn').on('click', function () {
+          $('#divBox').fadeOut() // id가 "divBox"인 요소를 점점 사라지게 함.
+        })
+      })
+    </script>
+  </head>
+  <body>
+    <h1>페이드 인과 페이드 아웃</h1>
+    <button id="fadeInBtn">페이드 인</button>
+    <button id="fadeOutBtn">페이드 아웃</button>
+    <div id="divBox"></div>
+    <p>제이쿼리에서 페이드 효과는 CSS opacity 속성값을 빠르게 변경하여 표현해요!</p>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이펙트</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+      integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      $(function () {
+        /* $('#showBtn').on('click', function () {
+          $('#text').show(2000)
+        })
+
+        $('#hideBtn').on('click', function () {
+          $('#text').hide('fast')
+        }) */
+
+        $('#toggleBtn').on('click', function () {
+          $('#text').toggle('slow')
+        })
+      })
+    </script>
+  </head>
+  <body>
+    웹 페이지에서 효과를 손쉽게 적용할 수 있도록 다양한 메소드 제공
+    <br />
+    hide(): 숨기기
+    <br />
+    show(): 보여주기
+    <h1>요소의 숨깁 표시</h1>
+    <button id="showBtn">요소 표시</button>
+    <button id="hideBtn">요소 숨기기</button>
+    <p>
+      CSS의 display 속성이 none으로 설정되어있기 때문에 웹페이지 레이아웃에서 아예 사라져 버린다
+    </p>
+    <p id="text">이 단락을 숨기거나 나타나게 할 거예욧</p>
+
+    <button id="toggleBtn">요소 표시</button>
+    <p>요소 표시 토글</p>
+    <p>선택한 요소가 어떤 상태인지(현재 상태를 보고 다른 동작을 실행한다)</p>
+    <p>선택한 요소가 현재 사라진 상태라면 show 동작</p>
+    <p>나타나있는 상태에서</p>
+  </body>
+</html>

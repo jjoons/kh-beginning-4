@@ -1,0 +1,159 @@
+:root {
+  --ediya-main-color: #243c84;
+  --font-sans: Pretendard, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+a {
+  text-decoration: none;
+  color: initial;
+}
+
+a:hover {
+  color: initial;
+}
+
+button {
+  background-color: initial;
+  border: initial;
+  padding: initial;
+}
+
+input {
+  border: none;
+}
+
+input[type='search'] {
+  padding: 0;
+}
+
+header > .__top_bar {
+  font-size: 0.75rem;
+  background-color: var(--ediya-main-color);
+  display: flex;
+  justify-content: space-between;
+}
+
+header .__links_1,
+header .__links_2 > .__links {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+header .__links_1 > .__item,
+header .__links_2 .__item {
+  padding: 0.375rem 0;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  position: relative;
+}
+
+header .__links_1 > .__item:not(.__active, :last-child)::after,
+header .__links_2 .__item:not(.__active, :last-child)::after {
+  content: '';
+  width: 1px;
+  height: 0.625rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  position: absolute;
+  right: 0;
+}
+header .__links_1 > .__item > a,
+header .__links_2 .__item > a {
+  color: white;
+  min-width: 100%;
+}
+
+header .__links_1 .__item.__active {
+  background-color: white;
+}
+
+header .__links_1 .__item.__active > a {
+  color: black;
+}
+
+header .__links_2 {
+  display: none;
+  margin-right: 2rem;
+}
+
+header .__links_2 > .__icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-right: 1.25rem;
+}
+
+header .__links_2 > .__search {
+  align-self: center;
+}
+
+header .__links_2 > .__search > input {
+  height: 2rem;
+  padding: 0 0.125rem;
+}
+
+@media (min-width: 1280px) {
+  header .__links_1 {
+    flex: 0 0 auto;
+  }
+
+  header .__links_1 > .__item,
+  header .__links_2 .__item {
+    width: auto;
+    padding: 0.935rem 1rem;
+  }
+
+  header .__links_1 > .__item > a,
+  header .__links_2 .__item > a {
+    font-size: 0.875rem;
+  }
+
+  header .__links_2 {
+    display: flex;
+  }
+}
+
+header .__main_header > .__main_header_top {
+  height: 3.75rem;
+}
+
+header .__main_header > .__main_header_top > .__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  margin: auto 1rem;
+}
+
+@media (min-width: 1280px) {
+  header .__main_header > .__main_header_top {
+    height: 4rem;
+  }
+
+  header .__main_header > .__main_header_top > .__inner {
+    margin: 0;
+    justify-content: center;
+  }
+
+  header .__main_header > .__main_header_top > .__inner .__menu_button {
+    display: none;
+  }
+}
+
+header .__mobile_menu {
+  display: none;
+}
+
+header .__mobile_menu.on {
+  display: block;
+  position: fixed;
+  inset: 0;
+  background-color: rgb(0 0 0 / 0.5);
+}
