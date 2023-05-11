@@ -1,0 +1,146 @@
+header > .__top_bar {
+  font-size: 0.75rem;
+  background-color: var(--ediya-main-color);
+  display: flex;
+  justify-content: space-between;
+}
+
+header .__links_1 {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+header .__links_1 > .__item {
+  padding: 0.375rem 0;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  position: relative;
+}
+
+header .__links_1 > .__item:not(.__active, :last-child)::after {
+  content: '';
+  width: 1px;
+  height: 0.625rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  position: absolute;
+  right: 0;
+}
+
+header .__links_1 > .__item > a {
+  color: white;
+  min-width: 100%;
+}
+
+header .__links_1 .__item.__active {
+  background-color: white;
+}
+
+header .__links_1 .__item.__active > a {
+  color: black;
+}
+
+@media (min-width: 1280px) {
+  header .__links_1 {
+    flex: 0 0 auto;
+  }
+
+  header .__links_1 > .__item {
+    width: auto;
+    padding: 0.935rem 1rem;
+  }
+
+  header .__links_1 > .__item > a {
+    font-size: 0.875rem;
+  }
+}
+
+header .__main_header > .__main_header_top {
+  height: 3.75rem;
+}
+
+header .__main_header > .__main_header_top > .__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  margin: auto 1rem;
+}
+
+@media (min-width: 1280px) {
+  header .__main_header > .__main_header_top {
+    height: 4rem;
+  }
+
+  header .__main_header > .__main_header_top > .__inner {
+    margin: 0;
+    justify-content: center;
+  }
+
+  header .__main_header > .__main_header_top > .__inner .__menu_button {
+    display: none;
+  }
+}
+
+header .__mobile_menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgb(0 0 0 / 0.5);
+}
+
+header .__mobile_menu.on {
+  display: block;
+}
+
+header .__mobile_menu > .__menu {
+  background-color: var(--ediya-main-color);
+  width: 85%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+header .__mobile_menu > .__menu > .__top_links {
+  padding: 1rem 1.5rem;
+}
+
+header .__mobile_menu > .__menu > .__top_links > .__links {
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+header .__mobile_menu > .__menu > .__top_links > .__links > a {
+  color: #8e99b6;
+  position: relative;
+  padding: 0 0.625rem;
+}
+
+header .__mobile_menu > .__menu > .__top_links > .__links > a:not(:last-child)::before {
+  content: '';
+  width: 1px;
+  height: 0.625rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #4e5e89;
+  position: absolute;
+  right: 0;
+}
+
+header .__mobile_menu > .__menu .__icons {
+  float: right;
+}
+
+header .__mobile_menu > .__menu .__icons > a {
+  opacity: 0.5;
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+}
+
+header .__mobile_menu > .__menu .__icons > a > img {
+  width: 100%;
+  height: 100%;
+}

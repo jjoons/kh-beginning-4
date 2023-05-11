@@ -48,14 +48,23 @@ void (function (D) {
 
   /** @type {import('./script').PasswordInputListener} */
   const passwordInputListener = function (e) {
-    if (password.value === password_repeat.value) {
+    if (
+      password.value === password_repeat.value &&
+      password.value.length >= 1 &&
+      password_repeat.value.length >= 1
+    ) {
       passwordVerifyMsgEl.classList.remove('error')
       passwordVerifyMsgEl.classList.add('ok')
       passwordVerifyMsgEl.innerText = '비밀번호가 같습니다'
     } else {
       passwordVerifyMsgEl.classList.remove('ok')
       passwordVerifyMsgEl.classList.add('error')
-      passwordVerifyMsgEl.innerText = '비밀번호가 다릅니다'
+
+      if (password.value.length <= 0 && password_repeat.value.length <= 0) {
+        passwordVerifyMsgEl.innerText = '비밀번호를 입력해 주시기 바랍니다'
+      } else {
+        passwordVerifyMsgEl.innerText = '비밀번호가 다릅니다'
+      }
     }
   }
 
@@ -68,7 +77,8 @@ void (function (D) {
     } else if (this.value.length <= 0) {
       emailVerifyMsgEl.innerText = '이메일을 입력해 주시기 바랍니다'
     } else {
-      emailVerifyMsgEl.innerText = '올바른 이메일 주소를 입력해 주시기 바랍니다'
+      emailVerifyMsgEl.innerText =
+        '올바른 이메일 주소를 입력해 주시기 바랍니다 (예: email@example.com)'
     }
   })
 
@@ -76,7 +86,8 @@ void (function (D) {
     if (this.validity.valid) {
       phoneNumberVerifyMsgEl.innerText = ''
     } else {
-      phoneNumberVerifyMsgEl.innerText = '전화번호를 올바르게 입력해 주시기 바랍니다'
+      phoneNumberVerifyMsgEl.innerText =
+        '휴대폰 번호를 올바르게 입력해 주시기 바랍니다 (예: 01012345678)'
     }
   })
 })(document)
