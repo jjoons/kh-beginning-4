@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/modern-normalize@1.1.0/modern-normalize.min.css"
+      integrity="sha256-yQDaLWKjd3bvabvcMsc71nQ+AAtItsBba2j9Yrntygs="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+    <script defer src="js/common.js"></script>
+    <script defer src="js/main.js"></script>
+  </head>
+  <body>
+    <div id="wrap">
+      <div class="buttons">
+        <div class="visible_not_login">
+          <a href="login.html" class="login_button">로그인</a>
+          <a href="register.html" class="register_button">회원가입</a>
+        </div>
+        <div class="visible_login" hidden>
+          <button type="button" class="logout_button">로그아웃</button>
+        </div>
+      </div>
+      <div class="message"></div>
+    </div>
+  </body>
+</html>

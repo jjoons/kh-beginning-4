@@ -1,7 +1,7 @@
 'use strict'
 
 void (function (D) {
-  /** @type {import('./script').Forms} */
+  /** @type {import('./register').Forms} */
   const { register_form } = D.forms
 
   if (!register_form) {
@@ -9,7 +9,7 @@ void (function (D) {
     return
   }
 
-  /** @type {import('./script').RegisterFormElements} */
+  /** @type {import('./register').RegisterFormElements} */
   const { id, password, password_repeat, name, email, nickname, phone_number } =
     register_form.elements
 
@@ -34,11 +34,16 @@ void (function (D) {
   }
 
   id.addEventListener('input', function (e) {
-    console.log(this.validity)
     if (this.validity.valid && this.value.length >= 1) {
-      idVerifyMsgEl.classList.remove('error')
-      idVerifyMsgEl.classList.add('ok')
-      idVerifyMsgEl.innerText = '정상'
+      if (account.hasID(this.value)) {
+        idVerifyMsgEl.classList.remove('ok')
+        idVerifyMsgEl.classList.add('error')
+        idVerifyMsgEl.innerText = '해당 ID가 존재합니다'
+      } else {
+        idVerifyMsgEl.classList.remove('error')
+        idVerifyMsgEl.classList.add('ok')
+        idVerifyMsgEl.innerText = '정상'
+      }
     } else {
       idVerifyMsgEl.classList.remove('ok')
       idVerifyMsgEl.classList.add('error')
@@ -46,7 +51,7 @@ void (function (D) {
     }
   })
 
-  /** @type {import('./script').PasswordInputListener} */
+  /** @type {import('./register').PasswordInputListener} */
   const passwordInputListener = function (e) {
     if (
       password.value === password_repeat.value &&
@@ -88,6 +93,24 @@ void (function (D) {
     } else {
       phoneNumberVerifyMsgEl.innerText =
         '휴대폰 번호를 올바르게 입력해 주시기 바랍니다 (예: 01012345678)'
+    }
+  })
+
+  register_form.addEventListener('submit', function (e) {
+    e.preventDefault()
+
+    if (
+      account.addAccount({
+        id: id.value,
+        password: password.value,
+        email: email.value,
+        name: name.value,
+        nickname: nickname.value,
+        phoneNumber: phone_number.value,
+      })
+    ) {
+      alert('회원 가입을 완료했습니다')
+      location.href = 'main.html'
     }
   })
 })(document)

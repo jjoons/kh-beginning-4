@@ -1,6 +1,7 @@
 :root {
   --ediya-main-color: #243c84;
   --font-sans: Pretendard, sans-serif;
+  --pc-screen-width: 1280px;
 }
 
 body {
@@ -32,4 +33,10 @@ input[type='search'] {
 
 [hidden] {
   display: none;
+}
+
+@media (min-width: 1280px) {
+  .pc_hidden {
+    display: none;
+  }
 }
