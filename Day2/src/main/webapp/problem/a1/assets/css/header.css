@@ -79,7 +79,7 @@ header .__main_header > .__main_header_top > .__inner {
     justify-content: center;
   }
 
-  header .__main_header > .__main_header_top > .__inner .__menu_button {
+  header .__main_header > .__main_header_top > .__inner .__sidebar_menu_button {
     display: none;
   }
 }
@@ -95,7 +95,7 @@ header .__mobile_menu.on {
   display: block;
 }
 
-header .__mobile_menu > .__menu {
+header .__mobile_menu > .__sidebar_menu {
   background-color: var(--ediya-main-color);
   width: 85%;
   position: absolute;
@@ -103,22 +103,29 @@ header .__mobile_menu > .__menu {
   top: 0;
   bottom: 0;
 }
-header .__mobile_menu > .__menu > .__top_links {
+
+header .__mobile_menu > .__sidebar_menu > .__mobile_menu_close_button {
+  position: absolute;
+  top: 0.875rem;
+  left: -1.875rem;
+}
+
+header .__mobile_menu > .__sidebar_menu > .__top_links {
   padding: 1rem 1.5rem;
 }
 
-header .__mobile_menu > .__menu > .__top_links > .__links {
+header .__mobile_menu > .__sidebar_menu > .__top_links > .__links {
   display: inline-flex;
   flex-wrap: wrap;
 }
 
-header .__mobile_menu > .__menu > .__top_links > .__links > a {
+header .__mobile_menu > .__sidebar_menu > .__top_links > .__links > a {
   color: #8e99b6;
   position: relative;
   padding: 0 0.625rem;
 }
 
-header .__mobile_menu > .__menu > .__top_links > .__links > a:not(:last-child)::before {
+header .__mobile_menu > .__sidebar_menu > .__top_links > .__links > a:not(:last-child)::before {
   content: '';
   width: 1px;
   height: 0.625rem;
@@ -129,18 +136,18 @@ header .__mobile_menu > .__menu > .__top_links > .__links > a:not(:last-child)::
   right: 0;
 }
 
-header .__mobile_menu > .__menu .__icons {
+header .__mobile_menu > .__sidebar_menu .__icons {
   float: right;
 }
 
-header .__mobile_menu > .__menu .__icons > a {
+header .__mobile_menu > .__sidebar_menu .__icons > a {
   opacity: 0.5;
   display: inline-block;
   width: 28px;
   height: 28px;
 }
 
-header .__mobile_menu > .__menu .__icons > a > img {
+header .__mobile_menu > .__sidebar_menu .__icons > a > img {
   width: 100%;
   height: 100%;
 }
