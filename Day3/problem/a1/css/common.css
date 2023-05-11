@@ -1,0 +1,22 @@
+input {
+  border: none;
+}
+
+button {
+  border: none;
+  background-color: initial;
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+}
+
+#wrap {
+  height: 100%;
+}
+
+button,
+input {
+  box-sizing: border-box;
+}
