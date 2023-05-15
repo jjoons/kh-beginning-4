@@ -52,10 +52,21 @@ main > form[name='search'] {
   align-items: center;
 }
 
-.search_input {
-  appearance: none;
+main > form[name='search'] .middle_search {
   border: 1px solid #dfe1e5;
   border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+}
+
+.search_input {
+  appearance: none;
+  border: none;
+  font-size: 1rem;
+}
+
+.search_input {
 }
 
 main > form[name='search'] .search_bottom_buttons {
