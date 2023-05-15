@@ -1,0 +1,20 @@
+:root {
+  --font-sans: Pretendard, ui-sans-serif, sans-serif;
+}
+
+body {
+  font-size: 14px;
+  font-family: var(--font-sans);
+}
+
+button {
+  border: none;
+  background-color: initial;
+  cursor: pointer;
+  padding: initial;
+}
+
+a {
+  text-decoration: none;
+  color: initial;
+}
