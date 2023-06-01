@@ -32,7 +32,8 @@ public class POSDBConnect {
 
     if (this.connection == null || this.connection.isClosed()) {
       Class.forName("com.mysql.cj.jdbc.Driver");
-      this.connection = DriverManager.getConnection(this.url, this.id, this.password);
+      // DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+      this.connection = DriverManager.getConnection(this.url + this.dbName, this.id, this.password);
     }
 
     return this.connection;
@@ -89,7 +90,7 @@ public class POSDBConnect {
         st.execute(new StringBuilder().append("CREATE TABLE students (\n")
             .append("  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,\n")
             .append("  class VARCHAR(30) NOT NULL,\n").append("  no VARCHAR(20) NOT NULL,\n")
-            .append("  name VARCHAR(50) NOT NULL,\n")
+            .append("  grade INT(1) NOT NULL,\n").append("  name VARCHAR(50) NOT NULL,\n")
             .append("  phone_number VARCHAR(11) NOT NULL\n").append(");").toString());
       }
     } finally {}
