@@ -1,0 +1,9 @@
+#wrap {
+  margin: 0 auto;
+  max-width: 48rem;
+}
+
+._header {
+  padding: 4rem 1rem;
+  margin-bottom: 2rem;
+}

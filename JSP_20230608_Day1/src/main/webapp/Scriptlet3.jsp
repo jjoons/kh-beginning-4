@@ -18,8 +18,8 @@
 
 <%!
   int[] numbers = {1, 2, 3, 4, 5, 6};
-  String[] name = {"이", "김", "홍", "박", "ㅁㄴㅇ", "ㄴㅇㄹ"};
-  String[] positions = {"a", "b", "c", "d", "e", "f"};
+  String[] positions = {"GK", "DF", "DF", "MF", "MF", "MF"};
+  String[] name = {"슈테겐", "세메두", "피케", "라키티치", "부스케츠", "수아레스"};
   
   Player[] players = new Player[numbers.length];
 %>
@@ -34,26 +34,34 @@
 <head>
   <meta charset="UTF-8">
   <title>Scriptlet3</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body>
-  <table border="1" style="border-collapse: collapse;">
-    <thead>
+  <!-- 스트라이프 행 줄무늬 -->
+  <table class="table table-striped">
+    <thead class="thead-dark">
     	<tr>
     		<th>번호</th>
-    		<th>이름</th>
     		<th>포지션</th>
+    		<th>이름</th>
     	</tr>
     </thead>
     <tbody>
       <% for (Player player : players) { %>
         <tr>
           <td><%= player.number %></td>
-          <td><%= player.name %></td>
           <td><%= player.position %></td>
+          <td><%= player.name %></td>
         </tr>
       <% } %>
     </tbody>
   </table>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <Script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <Script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <Script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>
 
