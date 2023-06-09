@@ -33,6 +33,13 @@
     <label>비밀번호 <input type="password" name="password"></label><br> <label>나이:
       <input type="text" name="age">
     </label><br>
+    
+    <!--
+      radio와 checkbox는 같은 그룹끼리 반드시 같은 이름의 name으로 지정해야 한다
+      선택한 체크값을 넘겨주는 value 속성을 사용해서 넘겨준다
+      value 속성을 지정하지 않으면 선택한 경우 on, 아닌경우 off
+      페이지로 넘어간다
+    -->
 
     <fieldset style="width: 120px;">
       <legend>성별</legend>

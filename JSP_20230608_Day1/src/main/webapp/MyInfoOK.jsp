@@ -1,3 +1,4 @@
+<%@page import="java.util.Arrays"%>
 <%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -34,10 +35,64 @@
       out.println("<script>alert('잘못된 나이가 입력되었습니다')</script>");
     }
 
-    String gender = request.getParameter("gender");
-
+    // out.println(): 웹 페이지에 출력
+    // System.out.println(): Eclipse 콘솔에 출력
 
     // 현재 나이는 20살이며 내년에는 21살입니다
+
+
+    // 성별을 구분하기 위해 request 객체 이용
+    // Boolean Wrapper 클래스를 이용해서 객체로 생성한 뒤 auto unboxing을 이용해서 기본 자료형으로 저장
+    boolean gender = Boolean.getBoolean(request.getParameter("gender"));
+    
+    out.println(name + "님 " + (gender ? "남자" : "여자") + "입니다");
+    
+    // 체크박스에 있는 값들을 가지고 오기
+    // getParameter(name): 넘어온 데이터를 받으면 맨 처음 선택한 값 1개만 받을 수 있다
+    // getParameterValues(): 배열로 반환한다
+    String[] hobbies = request.getParameterValues("hobbies");
+    out.println(name + "님의 취미는 " + hobbies + " 입니다 <br />");
+    out.println(name + "님의 취미는 " + Arrays.toString(hobbies) + " 입니다 <br />");
+    
+    out.println(name + "님의 취미는 ");
+    
+    // 만약 아무런 데이터를 선택하지 않았으면 오류 발생
+    // 예외 처리를 해야한다
+
+    try {
+      for (int i = 0; i < hobbies.length; i++) {
+        out.println(hobbies[i] + " ");
+      }
+      
+      out.println("입니다 <br />");
+    } catch (NullPointerException e) {
+      out.println("없습니다 <br />");
+    }
+
+    // 콤보 박스, 목록 상자 내용 확인
+    String trip = request.getParameter("trip");
+    out.println(name + "님은 " + trip + "에 가고 싶습니다 <br />");
+    
+    String[] travel = request.getParameterValues("travel");
+    out.println(name + "님은 " + travel + "에 가고 싶습니다 <br />");
+    out.println(name + "님은 " + Arrays.toString(travel) + "에 가고 싶습니다 <br />");
+
+    try {
+      for (int i = 0; i < travel.length; i++) {
+        out.println(travel[i] + " ");
+      }
+
+      out.println(" 입니다 <br />");
+    } catch (NullPointerException e) {
+      out.println(" 가고 싶은 곳이 없습니다 <br />");
+    }
+    
+    // 메모 (textarea)
+    String content = request.getParameter("content");
+    out.println(name + "님이 남긴 글: " + content);
+    
+    // 태그 사용 가능, 줄 바꿈 기능
+    out.println(name + "님이 남긴 글: " + content.replace("\r\n", "<br />") + "<br />");
   %>
 </body>
 </html>
