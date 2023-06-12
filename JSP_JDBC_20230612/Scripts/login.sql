@@ -1,0 +1,8 @@
+CREATE TABLE login (
+  dbid VARCHAR2(30),
+  dbpw VARCHAR2(30)
+);
+
+INSERT INTO login VALUES('555', '555');
+
+COMMIT;
