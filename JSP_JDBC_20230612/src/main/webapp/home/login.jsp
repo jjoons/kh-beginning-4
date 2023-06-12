@@ -32,7 +32,22 @@
 	} catch (SQLException e) {
 		out.println("데이터베이스 접속 에러 입니다!");
 	}
-	
+
+  String sql4 = "UPDATE login SET dbpw = ? WHERE dbid = ?";
+
+  PreparedStatement pstm4 = con.prepareStatement(sql4);
+  pstm4.setString(1, "3333");
+  pstm4.setString(2, "555");
+
+  ResultSet rs4 = pstm4.executeQuery();
+  
+  String sql5 = "DELETE FROM login WHERE dbid = ?";
+
+  PreparedStatement pstm5 = con.prepareStatement(sql4);
+  pstm4.setString(1, "555");
+
+  ResultSet rs5 = pstm4.executeQuery();
+
   String sql2 = "INSERT INTO login VALUES(?, ?)";
   PreparedStatement pstm2 = con.prepareStatement(sql2);
   

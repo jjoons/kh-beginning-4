@@ -1,0 +1,58 @@
+tr {
+  height: 70px; /* 행 높이 */
+}
+
+th {
+  font-size: 20pt;
+  width: 100px;
+}
+
+th#title {
+  font-size: 30pt; /* 글꼴 크기 */
+  font-family: D2Coding; /* 글꼴 이름 */
+  font-weight: bold; /* 굵게 */
+  color: tomato; /* 글자 색 */
+}
+
+th#sunday {
+  color: red;
+}
+
+th#saturday {
+  color: blue;
+}
+
+td {
+  text-align: right; /* 수평 정렬 */
+  vertical-align: top; /* 수직 정렬 */
+}
+
+td.sun {
+  color: red;
+}
+
+td.sat {
+  color: blue;
+}
+
+td#beforesun {
+  color: red;
+  font-size: 10pt;
+  background-color: lavender; /* 배경색 */
+}
+
+td.before {
+  font-size: 10pt;
+  background-color: lavender;
+}
+
+td#aftersat {
+  color: blue;
+  font-size: 10pt;
+  background-color: yellowgreen;
+}
+
+td.after {
+  font-size: 10pt;
+  background-color: yellowgreen;
+}
