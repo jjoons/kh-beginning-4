@@ -1,0 +1,136 @@
+table {
+  /* border: 선두께 선종류 선색상 */
+  border: 0px solid tomato;
+}
+
+tr {
+  height: 70px; /* 행 높이 */
+  border-width: 0px;
+}
+
+th {
+  font-size: 20pt;
+  width: 100px;
+  border-width: 0px;
+}
+
+th#title {
+  font-size: 30pt; /* 글꼴 크기 */
+  font-family: D2Coding; /* 글꼴 이름 */
+  font-weight: bold; /* 굵게 */
+  color: tomato; /* 글자 색 */
+}
+
+th#sunday {
+  color: red;
+}
+
+th#saturday {
+  color: blue;
+}
+
+td {
+  text-align: right; /* 수평 정렬 */
+  vertical-align: top; /* 수직 정렬 */
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+td.sun {
+  color: red;
+}
+
+td.sat {
+  color: blue;
+}
+
+td#beforesun {
+  color: red;
+  font-size: 10pt;
+  background-color: lavender; /* 배경색 */
+}
+
+td.before {
+  font-size: 10pt;
+  background-color: lavender;
+}
+
+td#aftersat {
+  color: blue;
+  font-size: 10pt;
+  background-color: yellowgreen;
+}
+
+td.after {
+  font-size: 10pt;
+  background-color: yellowgreen;
+}
+
+td#choice {
+  text-align: left;
+  vertical-align: middle;
+}
+
+td.holiday {
+  background-color: aliceblue;
+  color: red;
+  font-weight: bold;
+}
+
+span {
+  font-size: 8pt;
+}
+
+
+
+a {
+  color: black;
+  text-decoration: none; /* 밑줄 */
+}
+
+a:hover {
+  color: lime;
+  text-decoration: overline;
+}
+
+a:active {
+  color: DodgerBlue;
+  text-decoration: underline;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 0;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.select {
+  width: 100px;
+  height: 30px;
+}
+
+fieldset {
+  width: 105px;
+  height: 50px;
+  display: inline;
+  border: none;
+}
