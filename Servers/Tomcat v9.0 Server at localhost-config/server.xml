@@ -160,7 +160,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="Day1" path="/Day1" reloadable="true" source="org.eclipse.jst.jee.server:Day1"/><Context docBase="Day2" path="/Day2" reloadable="true" source="org.eclipse.jst.jee.server:Day2"/><Context docBase="JSP_20230608_Day1" path="/JSP_20230608_Day1" reloadable="true" source="org.eclipse.jst.jee.server:JSP_20230608_Day1"/><Context docBase="JSP_JDBC_20230612" path="/JSP_JDBC_20230612" reloadable="true" source="org.eclipse.jst.jee.server:JSP_JDBC_20230612"/><Context docBase="JSP_Calendar_20230613" path="/JSP_Calendar_20230613" reloadable="true" source="org.eclipse.jst.jee.server:JSP_Calendar_20230613"/></Host>
+      <Context docBase="Day1" path="/Day1" reloadable="true" source="org.eclipse.jst.jee.server:Day1"/><Context docBase="Day2" path="/Day2" reloadable="true" source="org.eclipse.jst.jee.server:Day2"/><Context docBase="JSP_20230608_Day1" path="/JSP_20230608_Day1" reloadable="true" source="org.eclipse.jst.jee.server:JSP_20230608_Day1"/><Context docBase="JSP_JDBC_20230612" path="/JSP_JDBC_20230612" reloadable="true" source="org.eclipse.jst.jee.server:JSP_JDBC_20230612"/><Context docBase="JSP_Calendar_20230613" path="/JSP_Calendar_20230613" reloadable="true" source="org.eclipse.jst.jee.server:JSP_Calendar_20230613"/><Context docBase="JSP_Voting_20230614" path="/JSP_Voting_20230614" reloadable="true" source="org.eclipse.jst.jee.server:JSP_Voting_20230614"/></Host>
     </Engine>
   </Service>
 </Server>

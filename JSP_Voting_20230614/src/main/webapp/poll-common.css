@@ -1,0 +1,20 @@
+#wrap {
+  max-width: 24rem;
+  margin: 0 auto;
+}
+
+#voting_table {
+  border-collapse: collapse;
+  width: 100%;
+  border-spacing: 0; /* cellspacing */
+}
+
+#voting_table td,
+#voting_table th {
+  border: 2px solid black;
+  padding: 2px; /* cellpadding */
+}
+
+#voting_table .voting_footer_button {
+  text-align: center;
+}
