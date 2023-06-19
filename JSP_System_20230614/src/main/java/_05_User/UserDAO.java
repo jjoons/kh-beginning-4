@@ -14,6 +14,14 @@ public class UserDAO {
   public String realPath = "";
   public String fileName = "userdata.txt";
 
+  private static UserDAO instance = new UserDAO();
+
+  public UserDAO() {}
+
+  public static UserDAO getInstance() {
+    return instance;
+  }
+
   // 관리자 기능
   //   1. 전체 회원의 정보를 리턴해 주는 메소드
   public ArrayList<UserDTO> getUserList() {
@@ -31,6 +39,35 @@ public class UserDAO {
     }
 
     return temp;
+  }
+
+  // 아이디를 가지고 아이디가 속한 객체의 정보를 반환하는 메소드
+  public UserDTO getUserId(String id) {
+    for (UserDTO temp : this.userList) {
+      if (temp.getId().equals(id)) {
+        return temp;
+      }
+    }
+
+    return null;
+  }
+
+  // 수정한 내용을 메모장, 리스트에 저장하는 메소드
+  public void updateUser(UserDTO user) {
+    //    for (int i = 0; i < this.userList.size(); i++) {
+    //      UserDTO temp = this.userList.get(i);
+    //
+    //      if (temp.getId().equals(user.getId())) {
+    //        this.saveData();
+    //      }
+    //    }
+
+    for (UserDTO temp : this.userList) {
+      if (temp.getId().equals(user.getId())) {
+        temp = user;
+        this.saveData();
+      }
+    }
   }
 
   // 파일 로드
@@ -92,6 +129,61 @@ public class UserDAO {
         fw.close();
       } catch (IOException e) {
         e.printStackTrace();
+      }
+    }
+  }
+
+  // 회원 가입 메소드
+  public void insertUser(UserDTO user) {
+    this.userList.add(user);
+
+    this.saveData();
+  }
+
+  // 아이디 중복 확인 메소드
+  public boolean checkUserId(UserDTO user) {
+    for (UserDTO temp : this.userList) {
+      if (temp.getId().equals(user.getId())) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  // 로그인 시 호출되야 하는 메소드
+  public boolean checkUserIdPw(String id, String pw) {
+    for (UserDTO temp : this.userList) {
+      if (temp.getId().equals(id) && temp.getPw().equals(pw)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  //  public void deleteUserId(String id) {
+  //    int i = 0;
+  //    for (UserDTO temp : userList) {
+  //      if (temp.getId().equals(id)) {
+  //        userList.remove(i);
+  //        saveData();
+  //        break;
+  //      }
+  //
+  //      i++;
+  //    }
+  //  }
+
+  public void deleteUserId(String id) {
+    for (int i = 0; i < this.userList.size(); i++) {
+      UserDTO user = this.userList.get(i);
+
+      if (user.getId().equals(id)) {
+        this.userList.remove(i);
+        this.saveData();
+
+        break;
       }
     }
   }
