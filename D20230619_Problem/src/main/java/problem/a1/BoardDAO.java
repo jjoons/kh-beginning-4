@@ -102,13 +102,19 @@ public class BoardDAO {
   //(4) 최대 ref 값을 리턴해주는 메서드
   //(5) 전체 게시글 내용을 출력해주는 메서드 <-- 콘솔에서 검토용
   //(6) boardList를 리턴해주는 메서드
-  public List<BoardDTO> getBoards(boolean reverse) {
+  public List<BoardDTO> getBoards(int perPage, int page) {
+    if (perPage <= 0 || page <= 0 || perPage > 1000) {
+      return null;
+    }
+
     List<BoardDTO> list = new ArrayList<>();
     String sql = new StringBuilder().append("SELECT * FROM d20230619p1_articles")
-        .append(reverse ? " ORDER BY id DESC" : "")
-        .append(" OFFSET 0 ROWS FETCH NEXT 1000 ROWS ONLY").toString();
+        .append(" ORDER BY id DESC").append(" OFFSET ? ROWS FETCH NEXT ? ROWS ONLY").toString();
 
     try (PreparedStatement ps = this.con.prepareStatement(sql)) {
+      ps.setInt(1, perPage * (page - 1));
+      ps.setInt(2, perPage);
+
       ResultSet rs = ps.executeQuery();
 
       while (rs.next()) {
@@ -127,10 +133,6 @@ public class BoardDAO {
     }
 
     return list;
-  }
-
-  public List<BoardDTO> getBoards() {
-    return this.getBoards(false);
   }
 
   //(7) 게시글 번호를 넘겨받으면 해당 게시글의 인덱스를 리턴해주는 메서드
@@ -154,6 +156,8 @@ public class BoardDAO {
         dto.setRegDate(rs.getString("reg_date"));
         dto.setReadCount(rs.getInt("read_count"));
 
+        this.increaseReadCount(dto);
+
         return dto;
       }
     } catch (SQLException e) {
@@ -167,15 +171,22 @@ public class BoardDAO {
   //(9) 게시글의 내용을(이메일,제목,내용) 수정해주는 메서드
   //(10) 게시글 삭제해주는 메서드 : 비밀번호가 일치하면 1을 불일치하면 -1을 리턴해준다.
 
-  private boolean increaseReadCount() {
+  private int increaseReadCount(BoardDTO board) {
     String sql = "UPDATE d20230619p1_articles SET read_count = ? WHERE id = ?";
 
     try (PreparedStatement ps = this.con.prepareStatement(sql)) {
-      // ps.setInt(1, 0);
+      int newCount = board.getReadCount() + 1;
+      board.setReadCount(newCount);
+
+      ps.setInt(1, newCount);
+      ps.setInt(2, board.getNum());
+
+      ps.executeUpdate();
+      return newCount;
     } catch (SQLException e) {
       e.printStackTrace();
     }
 
-    return false;
+    return -1;
   }
 }

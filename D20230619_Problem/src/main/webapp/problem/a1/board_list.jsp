@@ -7,7 +7,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<%
+  String pageString = request.getParameter("page");
+  String perPageString = request.getParameter("per_page");
+
+  int perPage = 10;
+  int pageA = 1;
+
+  if (pageString != null) {
+    try {
+      pageA = Integer.parseInt(pageString);
+    } catch (NumberFormatException e) {
+      e.printStackTrace();
+      pageA = -1;
+    }
+  }
+  
+  if (perPageString != null) {
+    try {
+      perPage = Integer.parseInt(perPageString);
+    } catch (NumberFormatException e) {
+      e.printStackTrace();
+      perPage = -1;
+    }
+  }
+  
+  BoardDAO dao = BoardDAO.getInstance();
+  List<BoardDTO> boards = dao.getBoards(perPage, pageA);
+
+  int total = dao.getTotalCount();
+%>
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,20 +61,19 @@
             <col />
             <col />
             <col style="width: 200px;" />
+            <col />
           </colgroup>
           <thead>
             <tr>
-              <th>번호</th>
-              <th>제목</th>
-              <th>작성자</th>
-              <th>시간</th>
+              <th scope="col">번호</th>
+              <th scope="col">제목</th>
+              <th scope="col">작성자</th>
+              <th scope="col">시간</th>
+              <th scope="col">조회</th>
             </tr>
           </thead>
           <tbody>
             <%
-              BoardDAO dao = BoardDAO.getInstance();
-              List<BoardDTO> boards = dao.getBoards(true);
-              
               if (boards.size() > 0) {
                 for (BoardDTO board : boards) {
             %>
@@ -57,18 +86,24 @@
                 </td>
                 <td><%= board.getWriter() %></td>
                 <td><%= board.getRegDate() %></td>
+                <td><%= board.getReadCount() %></td>
               </tr>
             <%
                 }
               } else {
             %>
               <tr>
-                <td rowspan="4">게시글이 없습니다.</td>
+                <td colspan="4">게시글이 없습니다.</td>
               </tr>
             <% } %>
           </tbody>
         </table>
       </div>
+      <jsp:include page="components/pagination.jsp">
+        <jsp:param name="page" value="<%= pageA %>" />
+        <jsp:param name="per_page" value="<%= perPage %>" />
+        <jsp:param name="total" value="<%= total %>" />
+      </jsp:include>
     </div>
   </div>
   <script
