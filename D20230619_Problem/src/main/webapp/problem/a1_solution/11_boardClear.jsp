@@ -8,13 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-  <% request.setCharacterEncoding("utf-8"); %>
-  <jsp:useBean id="boardDTO" class="problem.a1_solution.BoardDTO">
-    <jsp:setProperty property="*" name="boardDTO" />
-  </jsp:useBean>
   <%
-    BoardDAO.getInstance().boardUpdate(boardDTO);
-
+    BoardDAO.getInstance().boardClear();
     response.sendRedirect("04_boardList.jsp");
   %>
 </body>

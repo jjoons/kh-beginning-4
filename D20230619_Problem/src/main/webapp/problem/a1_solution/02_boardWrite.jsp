@@ -9,7 +9,7 @@
 <body>
 <div align="center">
     <h2>새글 작성하기</h2>
-    <form method="post" action="?">
+    <form method="post" action="03_boardWritePro.jsp">
       <table border="1">
         <tr>
           <td>작성자</td>

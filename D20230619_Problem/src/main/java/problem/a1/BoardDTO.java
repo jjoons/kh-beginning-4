@@ -14,64 +14,72 @@ public class BoardDTO {
     return num;
   }
 
-  public void setNum(int num) {
+  public BoardDTO setNum(int num) {
     this.num = num;
+    return this;
   }
 
   public String getWriter() {
     return writer;
   }
 
-  public void setWriter(String writer) {
+  public BoardDTO setWriter(String writer) {
     this.writer = writer;
+    return this;
   }
 
   public String getEmail() {
     return email;
   }
 
-  public void setEmail(String email) {
+  public BoardDTO setEmail(String email) {
     this.email = email;
+    return this;
   }
 
   public String getPassword() {
     return password;
   }
 
-  public void setPassword(String password) {
+  public BoardDTO setPassword(String password) {
     this.password = password;
+    return this;
   }
 
   public String getSubject() {
     return subject;
   }
 
-  public void setSubject(String subject) {
+  public BoardDTO setSubject(String subject) {
     this.subject = subject;
+    return this;
   }
 
   public String getContent() {
     return content;
   }
 
-  public void setContent(String content) {
+  public BoardDTO setContent(String content) {
     this.content = content;
+    return this;
   }
 
   public String getRegDate() {
     return regDate;
   }
 
-  public void setRegDate(String regDate) {
+  public BoardDTO setRegDate(String regDate) {
     this.regDate = regDate;
+    return this;
   }
 
   public int getReadCount() {
     return readCount;
   }
 
-  public void setReadCount(int readCount) {
+  public BoardDTO setReadCount(int readCount) {
     this.readCount = readCount;
+    return this;
   }
 
   @Override

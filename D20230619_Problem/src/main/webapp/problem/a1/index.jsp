@@ -13,6 +13,5 @@
   BoardDAO dao = BoardDAO.getInstance();
   %>
 
-  <%= dao.getBoardByNum(1) %>
 </body>
 </html>

@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+  <%
+    int num = Integer.parseInt(request.getParameter("num"));
+  %>
   <div align="center">
     <h2>게시글 삭제하기</h2>
     <form method="post" action="09_boardDeletePro.jsp">
@@ -21,7 +24,7 @@
             <input type="hidden" name="num" value="<%= num %>">
             
             <input type="submit" value="삭제하기">
-            <input type="button" value="목록으로" onclick="window.location.href='_04boardList.jsp'">
+            <input type="button" value="목록으로" onclick="window.location.href='04_boardList.jsp'">
           </td>
         </tr>
       </table>
