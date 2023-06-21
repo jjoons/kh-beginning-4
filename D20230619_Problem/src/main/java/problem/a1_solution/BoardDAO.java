@@ -2,7 +2,33 @@ package problem.a1_solution;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+
+class MultiSort implements Comparator<BoardDTO> {
+  @Override
+  public int compare(BoardDTO o1, BoardDTO o2) {
+    int result = 0;
+
+    if (o1.getRef() > o2.getRef()) {
+      result = -1;
+    } else if (o1.getRef() < o2.getRef()) {
+      result = 1;
+    }
+
+    if (o1.getRef() == o2.getRef()) {
+      if (o1.getReLevel() > o2.getReLevel()) {
+        result = -1;
+      } else if (o1.getReLevel() < o2.getReLevel()) {
+        result = 1;
+      }
+    }
+
+    return result;
+  }
+}
+
 
 public class BoardDAO {
   private static BoardDAO instance = new BoardDAO();
@@ -160,5 +186,58 @@ public class BoardDAO {
   // (12) 전체 게시글 삭제
   public void boardClear() {
     this.boardList.clear();
+  }
+
+  // (13) 답글을 저장해 주는 메소드
+  public void boardReplyWrite(int num, BoardDTO board) {
+    // 클릭해서 들어간 게시글의 index를 가지고 온다 (부모)
+    int index = this.getBoardIndex(num);
+
+    // 답글은 부모의 ref를 따른다
+    int ref = this.boardList.get(index).getRef();
+
+    // 답글은 부모의 reStep, reLevel 각각 하나씩 증가시킨다
+    int reStep = this.boardList.get(index).getReStep() + 1;
+
+    int reLevel = this.boardList.get(index).getReLevel() + 1;
+
+    // 만약 부모의 level보다 1 큰 게시글(?)이 있다면, 모두 추가로 1을 증가시킨다
+    for (int i = 0; i < this.boardList.size(); i++) {
+      // BoardDTO temp = this.boardList.get(i);
+
+      if (ref == this.boardList.get(i).getRef()) {
+        if (this.boardList.get(i).getReLevel() < this.boardList.get(i).getReLevel()) {
+          this.boardList.get(i).setReLevel(this.boardList.get(i).getReLevel() + 1);
+        }
+      }
+    }
+
+    // 아무리 답글이더라도 새로운 내용이 추가되었기 때문에 idNum 글 번호는 증가한다
+    int idNum = BoardDAO.idNum + 1;
+    board.setNum(idNum);
+    board.setRegDate(this.getDate());
+    board.setRef(ref);
+    board.setReStep(reStep);
+    board.setReLevel(reLevel);
+
+    this.boardList.add(board);
+    BoardDAO.idNum++;
+
+    // 답글도 추가가 된 상태이고 만약 파일 입출력까지 구현했으면
+    //   메모장에도 저장하는 메소드 호출
+  }
+
+  // (14) 게시글 정렬하기
+  //   게시글은 ref 순으로 내림차순으로 정렬한 후 reLevel 순으로 오름차순 정렬한다
+  public ArrayList<BoardDTO> sortBoardList() {
+    ArrayList<BoardDTO> tempList = new ArrayList<>();
+
+    for (int i = 0; i < this.boardList.size(); i++) {
+      tempList.add(this.boardList.get(i));
+    }
+
+    Collections.sort(tempList, new MultiSort());
+
+    return tempList;
   }
 }

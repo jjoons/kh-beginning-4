@@ -112,7 +112,7 @@
       </jsp:include>
       <div class="_buttons">
         <div>
-          <button type="button" class="btn btn-primary">더미 추가</button>
+          <button type="button" class="btn btn-primary" onclick="addDummy.call(this, event)">더미 추가</button>
         </div>
         <div>
           <button type="button" class="btn btn-danger">전체 삭제</button>
@@ -126,7 +126,18 @@
     crossorigin="anonymous"
   ></script>
   <script>
-    
+    function addDummy(event) {
+      fetch('add_dummy.jsp?count=10')
+        .then(v => v.json())
+        .then(v => {
+          if (v.success) {
+            alert('더미 목록을 추가했습니다.\n전체 게시글 수는 ' + v.total_count + "개 입니다.")
+            location.reload()
+          } else {
+            alert('더미 목록 추가에 실패했습니다.')
+          }
+        })
+    }
   </script>
 </body>
 </html>

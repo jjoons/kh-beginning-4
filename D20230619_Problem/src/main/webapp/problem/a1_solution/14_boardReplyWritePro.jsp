@@ -1,3 +1,4 @@
+<%@page import="problem.a1_solution.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,5 +20,20 @@
       ref 변수들을 이용해서 답글에 대해 추가하는 내용 작성
     새로운 답글도 list에 추가해야 한다. 그리고 idNum 증가
   -->
+  <%
+    request.setCharacterEncoding("utf-8");
+
+    int num = Integer.parseInt(request.getParameter("num"));
+    
+  %>
+  
+  <jsp:useBean id="board" class="problem.a1_solution.BoardDTO">
+    <jsp:setProperty property="board" name="*" />
+  </jsp:useBean>
+  
+  <%
+    BoardDAO.getInstance().boardReplyWrite(num, board);
+    response.sendRedirect("04_boardList.jsp");
+  %>
 </body>
 </html>

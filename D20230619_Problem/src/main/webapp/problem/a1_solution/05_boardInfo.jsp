@@ -47,7 +47,16 @@
             <input type="hidden" name="num" value="<%= board.getNum() %>">
           
             <input type="submit" value="수정하기">
-            <input type="button" value="삭제하기" onclick="window.location.href='08_boardDelete.jsp?num=<%= board.getNum() %>'">
+            <input
+              type="button"
+              value="삭제하기"
+              onclick="window.location.href='08_boardDelete.jsp?num=<%= board.getNum() %>'"
+            />
+            <input
+              type="button"
+              value="댓글 작성하기"
+              onclick="window.location.href='13_boardReplyWrite.jsp?num=<%= board.getNum() %>'"
+            />
             <input type="button" value="목록으로" onclick="window.location.href='04_boardList.jsp'">
           </td>
         </tr>

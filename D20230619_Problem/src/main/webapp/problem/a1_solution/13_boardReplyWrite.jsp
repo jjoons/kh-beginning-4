@@ -18,37 +18,33 @@
     <form method="post" action="14_boardReplyWritePro.jsp">
       <table border="1">
         <tr>
-          <td>번호</td>
-          <td><%= board.getNum() %></td>
-          <td>조회수</td>
-          <td><%= board.getReadCount() %></td>
-        </tr>
-        <tr>
           <td>작성자</td>
-          <td><%= board.getWriter() %></td>
-          <td>이메일</td>
-          <td><%= board.getEmail() %></td>
+          <td><input type="text" name="writer"></td>
         </tr>
         <tr>
           <td>제목</td>
-          <td><%= board.getSubject() %></td>
-          <td>작성일</td>
-          <td><%= board.getRegDate() %></td>
+          <td><input type="text" name="subject" value="답글 : "></td>
+        </tr>
+        <tr>
+          <td>이메일</td>
+          <td><input type="email" name="email"></td>
+        </tr>
+        <tr>
+          <td>비밀번호</td>
+          <td><input type="password" name="password"></td>
         </tr>
         <tr>
           <td>내용</td>
-          <td colspan="3">
-            <textarea rows="10" cols="20" readonly><%= board.getContent() %></textarea>
-          </td>
-        </tr>
+          <td><textarea rows="10" cols="20" name="content"></textarea></td>
+        </tr>       
         <tr>
-          <td colspan="4">
-            
-            <input type="hidden" name="num" value="<%= board.getNum() %>">
+          <td colspan="2">
           
-            <input type="submit" value="수정하기">
-            <input type="button" value="삭제하기" onclick="window.location.href='08_boardDelete.jsp?num=<%= board.getNum() %>'">
-            <input type="button" value="목록으로" onclick="window.location.href='04_boardList.jsp'">
+            <input type="hidden" name="num" value="<%= num %>">
+          
+            <input type="submit" value="등록하기">
+            <input type="reset" value="다시 작성하기">
+            <input type="button" value="목록으로" onclick="window.location.href='_04boardList.jsp'">
           </td>
         </tr>
       </table>

@@ -43,7 +43,7 @@
   if (perPage > 0 && pageA > 0 && total > 0) {
     totalPage = total / perPage + ((total % perPage) > 0 ? 1 : 0);
 %>
-  <nav>
+  <nav role="pagination">
     <ul>
       <% for (int i = 1; i <= totalPage; i++) { %>
         <li><%= i %></li>
@@ -54,5 +54,5 @@
   <nav>Pagination 오류</nav>
 <% } %>
 <div>
-  totalPage: <%= totalPage %>, perPage: <%= perPage %>, page: <%= pageA %>
+  totalPage: <%= totalPage %>, perPage: <%= perPage %>, page: <%= pageA %>, total: <%= total %>
 </div>

@@ -83,7 +83,7 @@ public class BoardDAO {
       ResultSet rs = ps.executeQuery();
 
       if (rs.next()) {
-        return rs.getInt("total_count");
+        return rs.getInt(1);
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -196,14 +196,41 @@ public class BoardDAO {
     }
 
     String sql = new StringBuilder().append("INSERT INTO d20230619p1_articles")
-        .append("(writer, email, password, subject, content, reg_date) VALUES")
-        .append("?, ?, ?, ?, ?, ?").toString();
+        .append("(writer, email, password, subject, content) VALUES").append(" (?, ?, ?, ?, ?)")
+        .toString();
 
-    for (int i = 1; i <= count; i++) {}
+    try (PreparedStatement ps = this.con.prepareStatement(sql)) {
+      for (int i = 1; i <= count; i++) {
+        int lastId = this.getLastId();
+
+        ps.setString(1, "작성자" + lastId);
+        ps.setString(2, "email" + lastId + "@example.com");
+        ps.setString(3, "1234");
+        ps.setString(4, "제목" + lastId);
+        ps.setString(5, "내용입니다" + lastId);
+
+        ps.executeUpdate();
+      }
+
+      return true;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    return false;
   }
 
   private int getLastId() {
     String sql = new StringBuilder().append("SELECT id FROM d20230619p1_articles")
-        .append(" ORDER BY id DESC").append(" ").toString();
+        .append(" ORDER BY id DESC").append(" OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY").toString();
+
+    try (PreparedStatement ps = this.con.prepareStatement(sql)) {
+      ResultSet rs = ps.executeQuery();
+      return rs.next() ? rs.getInt(1) : -1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    return -1;
   }
 }
