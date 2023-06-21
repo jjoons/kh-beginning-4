@@ -1,5 +1,5 @@
-<%@page import="problem.a1_solution.BoardDTO"%>
 <%@page import="problem.a1_solution.BoardDAO"%>
+<%@page import="problem.a1_solution.BoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
   %>
   <div align="center">
     <h2>게시글 내용</h2>
-    <form method="post" action="06_boardUpdate.jsp">
+    <form method="post" action="14_boardReplyWritePro.jsp">
       <table border="1">
         <tr>
           <td>번호</td>

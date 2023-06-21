@@ -2,13 +2,13 @@ CREATE SEQUENCE d20230619p1_article_id START WITH 1;
 
 CREATE TABLE d20230619p1_articles (
     id NUMBER DEFAULT d20230619p1_article_id.NEXTVAL PRIMARY KEY,
-    writer VARCHAR2(20),
-    email VARCHAR2(50),
-    password VARCHAR2(20),
-    subject VARCHAR2(80),
-    content VARCHAR2(4000),
-    reg_date TIMESTAMP,
-    read_count NUMBER
+    writer VARCHAR2(20) NOT NULL,
+    email VARCHAR2(50) NOT NULL,
+    password VARCHAR2(20) NOT NULL,
+    subject VARCHAR2(80) NOT NULL,
+    content VARCHAR2(4000) NOT NULL,
+    reg_date TIMESTAMP DEFAULT ON NULL SYSDATE NOT NULL,
+    read_count NUMBER DEFAULT ON NULL 0 NOT NULL;
 );
 
 INSERT INTO D20230619P1_ARTICLES(writer, email, password, subject, content, reg_date, read_count) VALUES

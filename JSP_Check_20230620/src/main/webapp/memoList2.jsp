@@ -160,19 +160,34 @@
         </tr>
     <% } %>
 
-    <!-- 첫 페이지부터 마지막 페이지까지 이동할 수 있는 하이퍼 링크 또는 버튼을 만든다 -->
-    <%
-      for (int i = 1; i <= totalPage; i++) {
-        // 1페이지면 버튼 비활성화
+    <!-- 6. 첫 페이지부터 마지막 페이지까지 이동할 수 있는 하이퍼 링크 또는 버튼을 만든다 -->
+    <tr>
+      <td colspan="5">
+        <%
+          for (int i = 1; i <= totalPage; i++) {
+            // 1페이지면 버튼 비활성화
+            if (currentPage == i) {
+        %>
+              <button type="button" disabled="disabled"><%= i %></button>
+          <% } else { %>
+              <button type="button" onclick="location.href = '?currentPage=<%= i %>'"><%= i %></button>
+        <%
+            }
+          }
+        %>
+      </td>
+    </tr>
+
+    <%--
+      for (int i=1; i<=totalPage; i++) {
         if (currentPage == i) {
-    %>
-          <button type="button" disabled="disabled"><%= i %></button>
-    <%  } else { %>
-          <button type="button" onclick="location.href = '?currentPage=<%= i %>'"><%= i %></button>
-    <%
+          out.println("<button type='button' disabled='disabled'>" + i + "</button>");
+        } else {
+          out.println("<button type='button' onclick='location.href=\"?currentPage=" + i + 
+            "\"'>" + i + "</button>");
         }
       }
-    %>
+    --%>
   </table>
 </body>
 </html>

@@ -189,4 +189,21 @@ public class BoardDAO {
 
     return -1;
   }
+
+  public boolean addDummyArticles(int count) {
+    if (count <= 0) {
+      return false;
+    }
+
+    String sql = new StringBuilder().append("INSERT INTO d20230619p1_articles")
+        .append("(writer, email, password, subject, content, reg_date) VALUES")
+        .append("?, ?, ?, ?, ?, ?").toString();
+
+    for (int i = 1; i <= count; i++) {}
+  }
+
+  private int getLastId() {
+    String sql = new StringBuilder().append("SELECT id FROM d20230619p1_articles")
+        .append(" ORDER BY id DESC").append(" ").toString();
+  }
 }

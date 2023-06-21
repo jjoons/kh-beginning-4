@@ -49,6 +49,12 @@
     crossorigin="anonymous"
   />
   <link rel="stylesheet" href="css/common.css" media="all" />
+  <style>
+    ._buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
 </head>
 <body>
   <div id="wrap">
@@ -104,6 +110,14 @@
         <jsp:param name="per_page" value="<%= perPage %>" />
         <jsp:param name="total" value="<%= total %>" />
       </jsp:include>
+      <div class="_buttons">
+        <div>
+          <button type="button" class="btn btn-primary">더미 추가</button>
+        </div>
+        <div>
+          <button type="button" class="btn btn-danger">전체 삭제</button>
+        </div>
+      </div>
     </div>
   </div>
   <script
@@ -111,5 +125,8 @@
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
     crossorigin="anonymous"
   ></script>
+  <script>
+    
+  </script>
 </body>
 </html>
