@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RentCarDAO {
   public static RentCarDAO instance = new RentCarDAO();
@@ -93,6 +94,44 @@ public class RentCarDAO {
     }
 
     return null;
+  }
+
+  // 예약 리스트에 저장하기
+  public void setReserveCar(CarReserve bean) {
+    // 예약 리스트에서 공통적인 예약 번호를 적기 위해서 가장 큰 번호를 가지고 온다
+    int maxNum = 0;
+
+    if (this.carReserveList.size() > 0) {
+      int last = this.carReserveList.size() - 1;
+      maxNum = carReserveList.get(last).getNo();
+    }
+    // 만약 데이터가 처음 저장되는 것이면 바로 추가
+    bean.setReserve_seq(maxNum);
+    this.carReserveList.add(bean);
+
+    // 파일에 저장하는 메소드 호출
+  }
+
+  public List<CarReserve> getReservation(String id) {
+    List<CarReserve> list = new ArrayList<>();
+
+    for (CarReserve reserve : this.carReserveList) {
+      if (reserve.getId().equals(id)) {
+        list.add(reserve);
+      }
+    }
+
+    return list;
+  }
+
+  public boolean removeReservation(int reserve_seq) {
+    for (CarReserve reserve : this.carReserveList) {
+      if (reserve.getReserve_seq() == reserve_seq) {
+        return this.carReserveList.remove(reserve);
+      }
+    }
+
+    return false;
   }
 
   // 회원가입이 없어서 미리 초기 설정

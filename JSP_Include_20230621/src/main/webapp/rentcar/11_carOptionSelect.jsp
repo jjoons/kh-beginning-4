@@ -28,7 +28,7 @@
     RentCarDAO dao = RentCarDAO.getInstance();
     RentCar bean = dao.getOneCar(no);
   %>
-  <form action="01_main.jsp?center=12_carReserveResult.jsp" method="post">
+  <form action="01_main.jsp?center=12_carReserveResult_solution.jsp" method="post">
     <table>
       <tr height="100">
         <td align="center" colspan="3">
