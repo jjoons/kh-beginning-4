@@ -83,6 +83,18 @@ public class RentCarDAO {
     return list;
   }
 
+  // 리스트에서 no을 이용해서 데이터를 꺼내가기
+  public RentCar getOneCar(int no) {
+    // 실제 번호 1, 2, 3, 4 이지만 리스트에 저장되는 값은 다르다
+    for (RentCar car : this.rentCarList) {
+      if (car.getNo() == no) {
+        return car;
+      }
+    }
+
+    return null;
+  }
+
   // 회원가입이 없어서 미리 초기 설정
   public void memberBasicSet() {
     Member mb = new Member();

@@ -1,10 +1,12 @@
+<%@page import="com.rentcar.RentCarDAO"%>
+<%@page import="com.rentcar.RentCar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>소형 중형 대형 선택</title>
+  <meta charset="UTF-8">
+  <title>소형 중형 대형 선택</title>
 </head>
 <body>
   <!--
@@ -14,5 +16,78 @@
     
     메소드 getOneCar(no)
   -->
+  <%
+    int no = Integer.parseInt(request.getParameter("no"));
+    
+    // 렌트카 하나에 대한 정보를 얻어옴
+    RentCar bean = RentCarDAO.instance.getOneCar(no);
+    
+    int category = bean.getCategory();
+    String temp = "";
+    
+    if (category == 1) temp = "소형";
+    else if (category == 2) temp = "중형";
+    else if (category == 3) temp = "대형";
+  %>
+  <div align="center">
+    <form action="01_main.jsp?center=11_carOptionSelect.jsp" method="POST">
+      <table>
+        <tr height="100">
+          <td align="center" colspan="3">
+            <font size="6" color="gray">
+              <%= bean.getName() %> 차량 선택
+            </font>
+          </td>
+        </tr>
+        <tr>
+          <td rowspan="6" width="500" align="center">
+            <img src="imgCar/<%= bean.getImg() %>" alt="" width="450" />
+          </td>
+          <td width="250" align="center">차량이름</td>
+          <td width="250" align="center"><%= bean.getName() %></td>
+        </tr>
+
+        <!-- 1대, 2대 선택하는 옵션 -->
+        <tr>
+          <td width="250" align="center">차량수량</td>
+          <td width="250" align="center">
+            <select name="qty">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <!-- 차량 분류 -->
+          <td width="250" align="center">차량 분류</td>
+          <td width="250" align="center"><%= temp %></td>
+        </tr>
+        <tr>
+          <!-- 차량 대여 가격 -->
+          <td width="250" align="center">차량 대여 가격</td>
+          <td width="250" align="center"><%= bean.getPrice() %></td>
+        </tr>
+        <tr>
+          <!-- 차량 제조사 -->
+          <td width="250" align="center">제조사</td>
+          <td width="250" align="center"><%= bean.getCompany() %></td>
+        </tr>
+        <tr>
+          <td width="250" align="center">
+            <input type="hidden" name="no" value="<%= bean.getNo() %>" />
+            <input type="hidden" name="img" value="<%= bean.getImg() %>" />
+            <input type="submit" value="옵션 선택 후 구매하기" />
+          </td>
+        </tr>
+      </table>
+      <br />
+      <br />
+      <br />
+      <font size="5" color="gray">차량 정보 보기</font>
+      <p><%= bean.getInfo() %></p>
+    </form>
+  </div>
+  <% %>
 </body>
 </html>
