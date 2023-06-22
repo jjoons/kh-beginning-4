@@ -1,6 +1,17 @@
+<%@page import="com.rentcar.RentCarDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- 세션을 이용한 로그인 처리 -->
+<%
+  // 세션 영역에서 데이터를 가지고 온다
+  String id = (String) session.getAttribute("id");
+  if (id == null) {
+    id = "GUEST";
+  }
+
+  // 세션 영역에서 데이터가 null이면 GUEST라고 저장한다
+  RentCarDAO dao = RentCarDAO.getInstance();
+%>
 <table>
   <tr height="70">
     <td colspan="4">
@@ -9,7 +20,12 @@
       </a>
     </td>
     <td align="center" width="200">
-      <!--  로그인 할 때 채워야되는 부분 -->
+      <%= id %> 님
+      <% if (id.equals("GUEST")) { %>
+          <button onclick="location.href = '05_memberLogin.jsp'">로그인</button>
+      <% } else { %>
+          <button onclick="location.href = '07_memberLogout.jsp'">로그아웃</button>
+      <% } %>
     </td>
   </tr>
   <tr height="50">
