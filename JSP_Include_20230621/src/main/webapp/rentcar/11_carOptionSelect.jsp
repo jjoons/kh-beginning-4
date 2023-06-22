@@ -18,94 +18,90 @@
   베이비시트 적용 적용(1일 만원) / 비적용
 -->
   <%
-    RentCarDAO dao = RentCarDAO.getInstance();
-  
-    String img = null;
-    int no = -1;
-  
-    try {
-      no = Integer.parseInt(request.getParameter("no"));
-      img = request.getParameter("img");
-    } catch (NumberFormatException e) {}
+    // 옵션 선택 후 구매하기를 누르면 no, img 변수가 넘어온다    
+    int no = Integer.parseInt(request.getParameter("no"));
+    String img = request.getParameter("img");
     
+    // 수량
+    int qty = Integer.parseInt(request.getParameter("qty"));
+
+    RentCarDAO dao = RentCarDAO.getInstance();
     RentCar bean = dao.getOneCar(no);
   %>
-  <div align="center">
-    <form action="" method="post">
-      <table>
-        <tr height="100">
-          <td align="center" colspan="3">
-            <font size="6" color="gray">옵션 선택</font>
-          </td>
-        </tr>
-        <tr>
-          <td rowspan="7" width="500" align="center">
-            <img src="imgCar/<%= img %>" alt="" width="450">
-          </td>
-          <td width="250" align="center">대여기간</td>
-          <td width="250" align="center">
-            <select name="rent_days">
-              <option value="1">1일</option>
-              <option value="2">2일</option>
-              <option value="3">3일</option>
-              <option value="4">4일</option>
-              <option value="5">5일</option>
-              <option value="6">6일</option>
-              <option value="7">7일</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td width="250" align="center">대여일</td>
-          <td width="250" align="center">
-            <input type="date" name="rent_date" />
-          </td>
-        </tr>
-        <tr>
-          <td width="250" align="center">보험적용</td>
-          <td width="250" align="center">
-            <select name="apply_care">
-              <option value="true">적용(1일 만원)</option>
-              <option value="false">비적용</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td width="250" align="center">Wifi 적용</td>
-          <td width="250" align="center">
-            <select name="apply_wifi">
-              <option value="true">적용(1일 만원)</option>
-              <option value="false">비적용</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td width="250" align="center">네비게이션 적용</td>
-          <td width="250" align="center">
-            <select name="apply_wifi">
-              <option value="true">무료</option>
-              <option value="false">비적용</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td width="250" align="center">베이비시트 적용</td>
-          <td width="250" align="center">
-            <select name="apply_wifi">
-              <option value="true">적용(1일 만원)</option>
-              <option value="false">비적용</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td width="250" align="center" colspan="2">
-            <input type="hidden" name="no" value="<%= bean.getNo() %>" />
-            <input type="hidden" name="img" value="<%= bean.getImg() %>" />
-            <input type="submit" value="차량예약하기" />
-          </td>
-        </tr>
-      </table>
-    </form>
-  </div>
+  <form action="01_main.jsp?center=12_carReserveResult.jsp" method="post">
+    <table>
+      <tr height="100">
+        <td align="center" colspan="3">
+          <font size="6" color="gray">옵션 선택</font>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="7" width="500" align="center">
+          <img src="imgCar/<%= img %>" alt="" width="450" />
+        </td>
+        <td width="250" align="center">대여기간</td>
+        <td width="250" align="center">
+          <select name="dday">
+            <option value="1">1일</option>
+            <option value="2">2일</option>
+            <option value="3">3일</option>
+            <option value="4">4일</option>
+            <option value="5">5일</option>
+            <option value="6">6일</option>
+            <option value="7">7일</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td width="250" align="center">대여일</td>
+        <td width="250" align="center">
+          <input type="date" name="rday" id="today" size="15" />
+        </td>
+      </tr>
+      <tr>
+        <td width="250" align="center">보험적용</td>
+        <td width="250" align="center">
+          <select name="usein">
+            <option value="1">적용(1일 만원)</option>
+            <option value="2">비적용</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td width="250" align="center">Wifi 적용</td>
+        <td width="250" align="center">
+          <select name="usewifi">
+            <option value="1">적용(1일 만원)</option>
+            <option value="2">비적용</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td width="250" align="center">네비게이션 적용</td>
+        <td width="250" align="center">
+          <select name="usenavi">
+            <option value="1">무료</option>
+            <option value="2">비적용</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td width="250" align="center">베이비시트 적용</td>
+        <td width="250" align="center">
+          <select name="useseat">
+            <option value="1">적용(1일 만원)</option>
+            <option value="2">비적용</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" colspan="2">
+          <input type="hidden" name="no" value="<%= bean.getNo() %>" />
+          <input type="hidden" name="qty" value="<%= qty %>" />
+          <input type="submit" value="차량예약하기" />
+        </td>
+      </tr>
+    </table>
+  </form>
 </body>
 </html>
