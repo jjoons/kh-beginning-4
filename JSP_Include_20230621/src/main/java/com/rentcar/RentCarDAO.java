@@ -112,6 +112,10 @@ public class RentCarDAO {
     // 파일에 저장하는 메소드 호출
   }
 
+  public ArrayList<RentCar> getAllCar() {
+    return this.rentCarList;
+  }
+
   public List<CarReserve> getReservation(String id) {
     List<CarReserve> list = new ArrayList<>();
 
