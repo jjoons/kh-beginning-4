@@ -7,7 +7,7 @@ public class StudentDTO {
   private String address; //주소
   private String tel; //전화번호
   private String email; //이메일
-  private String major; //전공 (1==컴공, 2==전자공학, 3==응용수학 , 4==교양)
+  private int major; //전공 (1==컴공, 2==전자공학, 3==응용수학 , 4==교양)
   private int grade; //학년
   private int hakjom; //학점(전공교양 합해서 130==>졸업조건)
 
@@ -15,7 +15,7 @@ public class StudentDTO {
   public StudentDTO() {}
 
   public StudentDTO(String hakbun, String passwd, String name, String address, String tel,
-      String email, String major, int grade, int hakjom) {
+      String email, int major, int grade, int hakjom) {
     this.hakbun = hakbun;
     this.passwd = passwd;
     this.name = name;
@@ -75,11 +75,11 @@ public class StudentDTO {
     this.email = email;
   }
 
-  public String getMajor() {
+  public int getMajor() {
     return major;
   }
 
-  public void setMajor(String major) {
+  public void setMajor(int major) {
     this.major = major;
   }
 

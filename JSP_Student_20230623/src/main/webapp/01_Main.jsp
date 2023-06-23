@@ -22,21 +22,23 @@
       }
     %>
     <table>
-    <tr>
-      <!-- 왼쪽 left.jsp -->
-      <td align="center" height="200">
-        <jsp:include page="03_left.jsp"></jsp:include>
-      </td>
-      <!-- top.jsp -->
-      <td align="center" height="800">
-        <jsp:include page="02_top.jsp"></jsp:include>
-      </td>
-    </tr>
-    <tr>
-      <!-- 중앙 center -->
-      <td align="center" height="800">
-        <jsp:include page="<%= center %>"></jsp:include>
-      </td>
+      <tr align="center" height="200">
+        <!--  왼쪽 left.jsp -->
+  
+        <td align = "center" width ="200" rowspan="2">
+          <jsp:include page="03_left.jsp"></jsp:include>
+        </td>
+        <!-- top.jsp   -->
+        <td align = "center" height="">
+          <jsp:include page="02_top.jsp"></jsp:include>
+        </td>
+      </tr>
+  
+      <tr height="200">
+        <!--  중앙 center -->
+        <td align = "center" height="">
+          <jsp:include page="<%=center %>"></jsp:include>
+        </td>
       </tr>
     </table>
   </body>
