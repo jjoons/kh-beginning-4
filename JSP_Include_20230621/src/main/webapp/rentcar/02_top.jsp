@@ -34,7 +34,7 @@
       style="text-decoration: none">예 약 하 기</a></font>
     </td>
     <td align="center" width="200" bgcolor="pink">
-      <font color="white" size="5"><a href="01_main.jsp?center=14_carReserveView.jsp" 
+      <font color="white" size="5"><a href="01_main.jsp?center=14_carReserveView_solution.jsp" 
       style="text-decoration: none">예 약 확 인</a></font>
     </td>
     <td align="center" width="200" bgcolor="pink">

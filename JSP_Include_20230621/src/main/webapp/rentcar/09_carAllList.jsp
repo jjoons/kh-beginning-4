@@ -30,7 +30,7 @@
     <%  } %>
         <td width="333" align="center">
           <a href="01_main.jsp?center=10_carReserveInfo.jsp%3Fno%3D<%= v.get(i).getNo() %>">
-            <img src="imgCar/<%= v.get(i).getInfo() %>" alt="" />
+            <img src="imgCar/<%= v.get(i).getImg() %>" alt="" />
           </a>
           <font size="3" color="gray">차량명 | <%= v.get(i).getName() %></font>
         </td>

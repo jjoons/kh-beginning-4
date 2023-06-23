@@ -116,6 +116,49 @@ public class RentCarDAO {
     return this.rentCarList;
   }
 
+  public ArrayList<CarView> getAllReserve(String id) {
+    ArrayList<CarView> vec = new ArrayList<>();
+
+    // 실제 예약한 id를 찾아서 CarView에 넣어주기 위해서 만든 것
+    for (int i = 0; i < this.carReserveList.size(); i++) {
+      CarReserve reserve = this.carReserveList.get(i);
+      if (reserve.getId().equals(id)) {
+        for (int j = 0; j < this.rentCarList.size(); j++) {
+          if (reserve.getNo() == rentCarList.get(j).getNo()) {
+            RentCar car = rentCarList.get(j);
+            CarView view = new CarView();
+            view.setName(car.getName());
+            view.setPrice(car.getPrice());
+            view.setImg(car.getImg());
+            view.setQty(reserve.getQty());
+            view.setDday(reserve.getDday());
+            view.setRday(reserve.getRday());
+            view.setUsein(reserve.getUsein());
+            view.setUsewifi(reserve.getUsewifi());
+            view.setUsenavi(reserve.getUsenavi());
+            view.setUseseat(reserve.getUseseat());
+            vec.add(view);
+          }
+        }
+      }
+    }
+
+    return vec;
+  }
+
+  // 삭제
+  public void carRemoveReserve(String id, String rday) {
+    for (int i = 0; i < this.carReserveList.size(); i++) {
+      CarReserve reserve = this.carReserveList.get(i);
+      if (reserve.getId().equals(id)) {
+        if (reserve.getRday().equals(rday)) {
+          this.carReserveList.remove(i);
+          break;
+        }
+      }
+    }
+  }
+
   public List<CarReserve> getReservation(String id) {
     List<CarReserve> list = new ArrayList<>();
 
