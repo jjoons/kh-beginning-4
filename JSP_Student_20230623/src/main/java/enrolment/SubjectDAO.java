@@ -152,6 +152,35 @@ public class SubjectDAO {
     return s;
   }
 
+  // 중복 수강인지 확인하는 메소드
+  public int subjectCheck(String hakbun, int subjectNum) {
+    int check = 0;
+
+    try {
+      // 1. 데이터베이스 연동
+      this.getConnection();
+
+      // 2. 쿼리문 작성 및 보내기
+      String sql = "SELECT myNum FROM mysubject WHERE hakbun = ? AND subjectNum = ?";
+      this.pstmt = this.conn.prepareStatement(sql);
+      this.pstmt.setString(1, hakbun);
+      this.pstmt.setInt(2, subjectNum);
+      this.rs = this.pstmt.executeQuery();
+
+      // 3. 객체 저장
+      if (this.rs.next()) {
+        check = 1;
+      }
+    } catch (SQLException e) {
+      System.out.println(e);
+      check = 1;
+    } finally {
+      this.close();
+    }
+
+    return check;
+  }
+
   public void close() {
     try {
       if (this.rs != null && !this.rs.isClosed())

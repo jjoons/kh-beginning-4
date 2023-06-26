@@ -1,0 +1,11 @@
+/src/main/webapp/01_file_basic/images/*
+!/src/main/webapp/01_file_basic/images/.gitkeep
+
+/src/main/webapp/01_file_basic/filesave/*
+!/src/main/webapp/01_file_basic/filesave/.gitkeep
+
+/src/main/webapp/02_file2/images/*
+!/src/main/webapp/02_file2/images/.gitkeep
+
+/src/main/webapp/02_file2/filesave/*
+!/src/main/webapp/02_file2/filesave/.gitkeep
