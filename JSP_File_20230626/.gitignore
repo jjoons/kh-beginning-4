@@ -9,3 +9,9 @@
 
 /src/main/webapp/02_file2/filesave/*
 !/src/main/webapp/02_file2/filesave/.gitkeep
+
+/src/main/webapp/bookstore/imageFileSave/*
+!/src/main/webapp/bookstore/imageFileSave/.gitkeep
+
+/src/main/webapp/bookstore/images/*
+!/src/main/webapp/bookstore/images/.gitkeep
