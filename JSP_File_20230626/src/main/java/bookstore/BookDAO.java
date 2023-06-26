@@ -117,7 +117,7 @@ public class BookDAO {
       if (book_kind.equals("all")) {
         this.ps = this.conn.prepareStatement(sql);
       } else {
-        sql = "SELECT * FROM book WHERE book_kind = ? ORDER BY reg_date DESC";
+        sql += " WHERE book_kind = ? ORDER BY reg_date DESC";
         this.ps = this.conn.prepareStatement(sql);
         this.ps.setString(1, book_kind);
       }
@@ -127,7 +127,23 @@ public class BookDAO {
       // 전체면 전체 내용을 BookDTO에 저장
       // 일부도 저장
       // return 하기
+      while (this.rs.next()) {
+        BookDTO dto = new BookDTO();
+        dto.setBook_id(this.rs.getInt("book_id"));
+        dto.setBook_kind(this.rs.getString("book_kind"));
+        dto.setBook_title(this.rs.getString("book_title"));
+        dto.setBook_price(this.rs.getInt("book_price"));
+        dto.setBook_count(this.rs.getInt("book_count"));
+        dto.setAuthor(this.rs.getString("author"));
+        dto.setPublishing_com(this.rs.getString("publishing_com"));
+        dto.setPublishing_date(this.rs.getString("publishing_date"));
+        dto.setBook_image(this.rs.getString("book_image"));
+        dto.setBook_content(this.rs.getString("book_content"));
+        dto.setDiscount_rate(this.rs.getInt("discount_rate"));
+        dto.setReg_date(this.rs.getString("reg_date"));
 
+        list.add(dto);
+      }
     } catch (SQLException e) {
       e.printStackTrace();
     } finally {
