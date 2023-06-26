@@ -30,7 +30,7 @@
       e.printStackTrace();
     }
 
-    ArrayList<SubjectDTO> s = sdo.getSubjects2(major, grade);
+    ArrayList<SubjectDTO> s = sdo.getGradeMajorSubject(major, grade);
 %>
   <div align="right" style="border:1px solid">
     <form action="01_Main.jsp?center=08_subjectSelect.jsp" method="post">

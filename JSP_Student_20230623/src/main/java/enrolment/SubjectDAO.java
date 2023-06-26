@@ -112,7 +112,8 @@ public class SubjectDAO {
     return sto;
   }
 
-  public ArrayList<SubjectDTO> getSubjects2(String major, int grade) {
+  // 학년과 전공을 넘겨줘서 두 개의 조건을 만족하는 수강 객체를 ArrayList에 저장
+  public ArrayList<SubjectDTO> getGradeMajorSubject(String major, int grade) {
     ArrayList<SubjectDTO> s = new ArrayList<>();
     SubjectDTO sto = null;
 
