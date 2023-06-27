@@ -43,13 +43,13 @@
     <table border="1">
       <tr height="30">
         <td width="100" rowspan="4" align="center">
-          <a href="17_bookContent.jsp?book_id=<%= bookList.getBook_id() %>&book_kind=<%= book_kind %>">
+          <a href="17_bookContent_solution.jsp?book_id=<%= bookList.getBook_id() %>&book_kind=<%= book_kind %>">
             <img src="imageFileSave/<%= bookList.getBook_image() %>" width="90" height="120">
           </a>
         </td>
         <td width="350">
           <b>
-            <a href="17_bookContent.jsp?book_id=<%= bookList.getBook_id() %>&book_kind=<%= book_kind %>">
+            <a href="17_bookContent_solution.jsp?book_id=<%= bookList.getBook_id() %>&book_kind=<%= book_kind %>">
               <%= bookList.getBook_title() %>
             </a>
           </b>

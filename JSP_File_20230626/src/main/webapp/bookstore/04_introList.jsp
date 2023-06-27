@@ -23,12 +23,12 @@
     <table border="1">
       <tr height="30">
         <td width="100" rowspan="4" align="center">
-          <a href="17_bookContent.jsp?book_id=<%= bookLists[j].getBook_id() %>&book_kind=<%= bookLists[0].getBook_kind() %>">
+          <a href="17_bookContent_solution.jsp?book_id=<%= bookLists[j].getBook_id() %>&book_kind=<%= bookLists[0].getBook_kind() %>">
             <img width="90" height="120" src="imageFileSave/<%= bookLists[j].getBook_image() %>">
           </a>
         </td>
         <td width="250">
-          <a href="17_bookContent.jsp?book_id=<%= bookLists[j].getBook_id() %>&book_kind=<%= bookLists[0].getBook_kind() %>">
+          <a href="17_bookContent_solution.jsp?book_id=<%= bookLists[j].getBook_id() %>&book_kind=<%= bookLists[0].getBook_kind() %>">
             <b><%= bookLists[j].getBook_title() %></b>    
           </a>
         </td>

@@ -44,7 +44,7 @@
             <img alt="" src="imageFileSave/<%= dto.getBook_image() %>" height="100" width="75" />
           </td>
         	<td>
-            <a href="17_bookContent.jsp?book_id=<%= dto.getBook_id() %>">
+            <a href="17_bookContent_solution.jsp?book_id=<%= dto.getBook_id() %>">
               <font color="blue">
                 <%= dto.getBook_title() %>
               </font>

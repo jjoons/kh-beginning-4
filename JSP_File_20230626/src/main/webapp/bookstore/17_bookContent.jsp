@@ -54,12 +54,14 @@
       </tr>
       <tr>
       	<td>
-          수량: <input type="number" name="count" min="1" value="1" />개
-          <% if (isLogin) { %>
-            <input type="submit" value="장바구니에 담기" />
-          <% } %>
-          <button type="button">목록으로</button>
-          <button type="button">메인으로</button>
+          <form action="19_cartList.jsp" method="post">
+            수량: <input type="number" name="count" min="1" value="1" />개
+            <% if (isLogin) { %>
+              <input type="submit" value="장바구니에 담기" />
+            <% } %>
+            <button type="button">목록으로</button>
+            <button type="button">메인으로</button>
+          </form>
         </td>
       </tr>
       <tr>

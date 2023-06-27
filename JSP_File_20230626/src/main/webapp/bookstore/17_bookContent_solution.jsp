@@ -7,7 +7,6 @@
 %>
 <%
   String book_id = request.getParameter("book_id");
-  String book_kind = request.getParameter("book_kind");
   
   String id = (String) session.getAttribute("id");
   
@@ -18,6 +17,7 @@
   BookDAO dao = BookDAO.getInstance();
   BookDTO bookList = dao.getBook(Integer.parseInt(book_id));
   
+  String book_kind = bookList.getBook_kind();
   String book_kindName = "";
 
   if(book_kind.equals("100")){
