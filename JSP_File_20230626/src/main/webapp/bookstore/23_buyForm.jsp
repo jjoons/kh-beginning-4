@@ -52,6 +52,7 @@
         <%
         for(int i=0; i<cartLists.size(); i++){
           cartList = cartLists.get(i);
+          total += cartList.getBuy_count() * cartList.getBuy_price();
         %>
         <tr>
           <td width="50"><%= ++number %></td>
@@ -72,14 +73,13 @@
         %>
         <tr>
           <td colspan="5">
-            <% total += cartList.getBuy_count() * cartList.getBuy_price(); %>
             <b>총 구매금액 : <%= NumberFormat.getInstance().format(total) %></b>
           </td>
         </tr>
       </table>
       <br>
       
-      <form method="post" action="24_buyPro.jsp">
+      <form name="order_form" method="post" action="24_buyPro.jsp">
         <table border="1">
           <tr>
             <th colspan="2">주문자정보</th>
@@ -142,6 +142,18 @@
           </tr>
         </table>
       </form>
+      <script>
+        !function() {
+          /** @type {HTMLFormElement} */
+          const order_form = document.forms.order_form
+
+          order_form.addEventListener('submit', function (e) {
+            e.preventDefault()
+
+            // fetch()
+          })
+        }()
+      </script>
     </body>
   </html>
 <% } %>

@@ -59,7 +59,7 @@ public class BuyDAO {
         BuyDTO dto = new BuyDTO();
         dto.setBuy_id(this.rs.getInt("buy_id"));
         dto.setBuyer(this.rs.getString("buyer"));
-        dto.setBook_id(this.rs.getString("book_id"));
+        dto.setBook_id(this.rs.getInt("book_id"));
         dto.setBook_title(this.rs.getString("book_title"));
         dto.setBuy_price(this.rs.getInt("buy_price"));
         dto.setBuy_count(this.rs.getInt("buy_count"));
@@ -103,6 +103,31 @@ public class BuyDAO {
     }
 
     return list;
+  }
+
+  public boolean insertBuy(List<CartDTO> cartLists, String buyer, String account,
+      String deliveryName, String deliveryTel, String deliveryAddress) {
+
+  }
+
+  // 
+  public int getListCount() {
+    try {
+      String sql = "SELECT COUNT(*) FROM buy";
+
+      this.getConnection();
+      this.ps = this.conn.prepareStatement(sql);
+
+      this.rs = this.ps.executeQuery();
+
+      if (this.rs.next()) {
+        return this.rs.getInt(1);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    return -1;
   }
 
   public void close() {
