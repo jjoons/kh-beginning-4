@@ -68,6 +68,37 @@ public class CustomerDAO {
     return check;
   }
 
+  // 회원 정보 가지고 오기
+  public CustomerDTO getMember(String id) {
+    CustomerDTO dto = null;
+
+    try {
+      this.getConnection();
+      String sql = "SELECT * FROM member WHERE id = ?";
+
+      this.ps = this.conn.prepareStatement(sql);
+      this.ps.setString(1, id);
+
+      this.rs = ps.executeQuery();
+
+      if (this.rs.next()) {
+        dto = new CustomerDTO();
+        dto.setId(rs.getString("id"));
+        dto.setPasswd(rs.getString("passwd"));
+        dto.setName(rs.getString("name"));
+        dto.setReg_date(rs.getString("reg_date"));
+        dto.setTel(rs.getString("tel"));
+        dto.setAddress(rs.getString("address"));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      this.close();
+    }
+
+    return dto;
+  }
+
   public void close() {
     try {
       if (this.conn != null && !this.conn.isClosed()) {

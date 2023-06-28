@@ -131,10 +131,10 @@
           .then(v => v.json())
           .then(v => {
             if (v.success) {
-              alert('해당 아이템을 삭제했습니다.')
+              alert(deleteAll ? '장바구니를 비웠습니다.' : '해당 아이템을 삭제했습니다.')
               location.reload()
             } else {
-              alert('해당 아이템을 삭제하지 못 했습니다.\n\n서버 메시지:\n' + v.message)
+              alert((deleteAll ? '장바구니를 비우지 못 했습니다.' : '해당 아이템을 삭제하지 못 했습니다.') + '\n\n서버 메시지:\n' + v.message)
             }
           })
       }
