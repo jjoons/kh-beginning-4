@@ -60,7 +60,7 @@
         for(int i=0; i<cartLists.size(); i++){ 
           cartList = (CartDTO)cartLists.get(i); 
         %>
-        <tr>
+        <tr data-cart-id="<%= cartList.getCart_id() %>">
           <td width="50"><%= ++number %></td>
           <td width="300">
             <img src="imageFileSave/<%= cartList.getBook_image() %>" width="30" height="50">
@@ -75,12 +75,14 @@
             String url = "21_updateCartForm.jsp?cart_id=" + cartList.getCart_id() + 
             "&book_kind=" + book_kind + "&buy_count=" + cartList.getBuy_count();
             %>
-            <input type="button" value="수정" onclick="window.location.href='<%= url %>'">
+            <%-- <input type="button" value="수정" onclick="window.location.href='<%= url %>'"> --%>
+            <input type="button" value="수정" onclick="modifyCount(<%= cartList.getCart_id() %>)">
           </td>
           <td width="150">
             <% total += cartList.getBuy_count() * cartList.getBuy_price(); %>
             <%= NumberFormat.getInstance().format(cartList.getBuy_count() * cartList.getBuy_price()) %>
-            <input type="button" value="삭제" onclick="window.location.href='20_cartListDel.jsp?list=<%= cartList.getCart_id() %>&book_kind=<%= book_kind %>'">
+            <input type="button" value="삭제" onclick="deleteCartItem(<%= cartList.getCart_id() %>)">
+            <%-- <input type="button" value="삭제" onclick="window.location.href='20_cartListDel.jsp?list=<%= cartList.getCart_id() %>&book_kind=<%= book_kind %>'"> --%>
           </td>
         </tr> 
         <%}%>
@@ -93,7 +95,8 @@
           <td colspan="5">
             <input type="submit" value="구매하기" >
             <input type="button" value="쇼핑계속" onclick="window.location.href='16_list.jsp?book_kind=<%= book_kind %>'">
-            <input type="button" value="장바구니비우기" onclick="window.location.href='20_cartListDel.jsp?list=all&book_kind=<%= book_kind %>'">
+            <input type="button" value="장바구니비우기" onclick="deleteCartItem(0, true)">
+            <%-- <input type="button" value="장바구니비우기" onclick="window.location.href='20_cartListDel.jsp?list=all&book_kind=<%= book_kind %>'"> --%>
           </td>
         </tr>
       </table>
@@ -102,5 +105,39 @@
       }
     } 
     %>
+    <script>
+      function modifyCount(cartId) {
+        let newCount = document.querySelector('tr[data-cart-id="' + cartId + '"]').querySelector('input[name="buy_count"]').value
+
+        fetch(`22_updateCartPro_api.jsp?\${new URLSearchParams({
+          cart_id: cartId,
+          new_count: newCount
+        })}`, { method: 'POST' })
+          .then(v => v.json())
+          .then(v => {
+            if (v.success) {
+              alert('수량을 변경했습니다.')
+              location.reload()
+            } else {
+              alert('수량 변경에 실패했습니다.\n\n서버 메시지:\n' + v.message)
+            }
+          })
+      }
+
+      function deleteCartItem(cartId, deleteAll) {
+        fetch(deleteAll ? `20_cartListDeleteAllPro_api.jsp` : `20_cartListDeletePro_api.jsp?\${new URLSearchParams({
+          cart_id: cartId
+        })}`, { method: 'POST' })
+          .then(v => v.json())
+          .then(v => {
+            if (v.success) {
+              alert('해당 아이템을 삭제했습니다.')
+              location.reload()
+            } else {
+              alert('해당 아이템을 삭제하지 못 했습니다.\n\n서버 메시지:\n' + v.message)
+            }
+          })
+      }
+    </script>
   </body>
 </html>
