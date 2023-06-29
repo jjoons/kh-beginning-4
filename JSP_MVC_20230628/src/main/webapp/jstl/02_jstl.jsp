@@ -56,5 +56,66 @@
       ${i} * ${j} = <c:out value="${i * j}" /><br />
     </c:forEach>
   </c:forEach>
+  
+  <br />
+  
+  <!--
+    ####
+    ####
+    ####
+    ####
+    ####
+  -->
+  <c:forEach var="i" begin="1" end="5">
+    <c:forEach var="j" begin="1" end="4">
+      #
+    </c:forEach>
+    <br />
+  </c:forEach>
+  
+  <br />
+  
+  <!--
+    #
+    ##
+    ###
+    ####
+    #####
+  -->
+  <c:forEach var="i" begin="1" end="5">
+    <c:forEach var="j" begin="1" end="${ i }">
+      #
+    </c:forEach>
+    <br />
+  </c:forEach>
+  
+  <br />
+  
+  <!--
+        #
+       ##
+      ###
+     ####
+    #####
+  -->
+  <c:forEach var="i" begin="1" end="5">
+    <c:forEach var="j" begin="${ i }" end="4">
+      +
+    </c:forEach>
+    <c:forEach var="j" begin="1" end="${ i }">
+      #
+    </c:forEach>
+    <br />
+  </c:forEach>
+  
+  <br />
+  
+  <!--
+        #
+       ###
+      #####
+     #######
+    #########
+  -->
 </body>
 </html>
