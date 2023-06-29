@@ -7,21 +7,28 @@
   <title>Insert title here</title>
 </head>
 <body>
-  <div>
-    국어 점수: <c:out value="${korScore}"></c:out>
-  </div>
-  <div>
-    수학 점수: <c:out value="${mathScore}"></c:out>
-  </div>
-  <div>
-    영어 점수: <c:out value="${engScore}"></c:out>
-  </div>
-  <div>
+  <h3>
+    국어 성적 = <c:out value="${korScore}"></c:out>
+  </h3>
+  <h3>
+    수학 성적 = <c:out value="${mathScore}"></c:out>
+  </h3>
+  <h3>
+    영어 성적 = <c:out value="${engScore}"></c:out>
+  </h3>
+  <%--
+  <h3>
     평균 점수: <c:out value="${avgScore}"></c:out>
-  </div>
+  </h3>
+  --%>
   <br />
-  <p style="font-weight: 700">
-    <c:out value="${resultMsg}">정보 없음</c:out>
-  </p>
+  <h3>
+    <c:choose>
+      <c:when test="${result}">합격</c:when>
+      <c:when test="${not result}">불합격</c:when>
+    </c:choose>
+    입니다.
+  </h3>
+  <h3><c:out value="${resultMsg}" /></h3>
 </body>
 </html>

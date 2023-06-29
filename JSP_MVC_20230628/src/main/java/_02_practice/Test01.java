@@ -36,6 +36,7 @@ public class Test01 extends HttpServlet {
     int engScore = 0;
     double avgScore = 0;
     String resultMsg = null;
+    boolean result = false;
 
     String korScoreStr = req.getParameter("korScore");
     String mathScoreStr = req.getParameter("mathScore");
@@ -47,7 +48,8 @@ public class Test01 extends HttpServlet {
       engScore = Integer.parseInt(engScoreStr);
 
       avgScore = (korScore + mathScore + engScore) / 3;
-      resultMsg = avgScore >= 70 ? "합격" : "불합격";
+      result = avgScore >= 70;
+      resultMsg = result ? "합격" : "불합격";
     } catch (NumberFormatException e) {
       resultMsg = "숫자만 입력할 수 있습니다.";
     }
@@ -56,6 +58,7 @@ public class Test01 extends HttpServlet {
     req.setAttribute("mathScore", mathScore);
     req.setAttribute("engScore", engScore);
     req.setAttribute("avgScore", avgScore);
+    req.setAttribute("result", result);
     req.setAttribute("resultMsg", resultMsg);
 
     RequestDispatcher rd = req.getRequestDispatcher("01_basicView.jsp");

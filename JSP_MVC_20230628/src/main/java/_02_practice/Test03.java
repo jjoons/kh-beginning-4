@@ -34,7 +34,7 @@ public class Test03 extends HttpServlet {
     String id = req.getParameter("id");
     String pw = req.getParameter("pw");
 
-    req.setAttribute("result", (id.equals(dbId) && pw.equals(dbPw)) ? "로그인 성공" : "로그인 실패");
+    req.setAttribute("result", id.equals(dbId) && pw.equals(dbPw));
 
     RequestDispatcher rd = req.getRequestDispatcher("03_basicView.jsp");
     rd.forward(req, resp);
