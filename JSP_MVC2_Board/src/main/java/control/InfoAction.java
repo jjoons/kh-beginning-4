@@ -1,7 +1,6 @@
 package control;
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import model.BeanDAO;
 import model.BoardBean;
 
-@WebServlet("/board_list")
-public class BoardListAction extends HttpServlet {
+@WebServlet("/board_view")
+public class InfoAction extends HttpServlet {
   private static final long serialVersionUID = 121666636999165320L;
 
   @Override
@@ -24,22 +23,28 @@ public class BoardListAction extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    String pageStr = req.getParameter("page");
-    int page = 0;
-    int count = 10;
+    String numStr = req.getParameter("page");
+    int num = 0;
 
     try {
-      page = pageStr != null ? Integer.parseInt(pageStr) : 1;
+      num = numStr != null ? Integer.parseInt(numStr) : 1;
     } catch (NumberFormatException e) {
       e.printStackTrace();
-      count = 0;
+      num = 0;
     }
 
     BeanDAO dao = BeanDAO.getInstance();
-    List<BoardBean> list = dao.getBoards(count, page);
+    dao.increaseReadCount(num);
+    BoardBean bean = dao.getBoard(num);
 
-    req.setAttribute("boardList", list);
+    req.setAttribute("num", bean.getNum());
+    req.setAttribute("readcount", bean.getReadcount());
+    req.setAttribute("writer", bean.getWriter());
+    req.setAttribute("reg_date", bean.getReg_date());
+    req.setAttribute("email", bean.getEmail());
+    req.setAttribute("subject", bean.getSubject());
+    req.setAttribute("content", bean.getContent());
 
-    req.getRequestDispatcher("board_list.jsp").forward(req, resp);
+    req.getRequestDispatcher("board_view.jsp").forward(req, resp);
   }
 }
