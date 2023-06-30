@@ -7,21 +7,30 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebServlet("/join.do")
-public class _02_Join extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+@WebServlet("/logout.do")
+public class _06_Logout extends HttpServlet {
+  private static final long serialVersionUID = -8260089500808793582L;
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    RequestDispatcher dis = req.getRequestDispatcher("02_join.jsp");
-    dis.forward(req, resp);
+    this.reqPro(req, resp);
   }
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    resp.setStatus(405);
+    this.reqPro(req, resp);
+  }
+
+  protected void reqPro(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    HttpSession session = req.getSession();
+    session.invalidate();
+    
+    RequestDispatcher dis = req.getRequestDispatcher("06_logout.jsp");
+    dis.forward(req, resp);
   }
 }

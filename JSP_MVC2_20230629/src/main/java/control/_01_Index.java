@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 // control 폴더 안에 서블릿들을 모아두었다
 @WebServlet("/index.do")
 public class _01_Index extends HttpServlet {
+  private static final long serialVersionUID = 1523673603728242841L;
+
   // 서블릿으로 만들 것
   // 1. 로그인하면 데이터 추가
   //   여러 페이지에서 공유. session 영역에 id 저장
@@ -34,7 +36,7 @@ public class _01_Index extends HttpServlet {
 
     req.setAttribute("id", id);
 
-    RequestDispatcher dis = req.getRequestDispatcher("control/01_index.jsp");
+    RequestDispatcher dis = req.getRequestDispatcher("01_index.jsp");
     dis.forward(req, resp);
   }
 }
