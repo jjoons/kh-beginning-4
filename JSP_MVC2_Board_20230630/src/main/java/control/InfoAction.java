@@ -6,10 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.BeanDAO;
+import model.BoardDAO;
 import model.BoardBean;
 
-@WebServlet("/board_view")
+@WebServlet("/InfoAction")
 public class InfoAction extends HttpServlet {
   private static final long serialVersionUID = 121666636999165320L;
 
@@ -33,7 +33,7 @@ public class InfoAction extends HttpServlet {
       num = 0;
     }
 
-    BeanDAO dao = BeanDAO.getInstance();
+    BoardDAO dao = BoardDAO.getInstance();
     dao.increaseReadCount(num);
     BoardBean bean = dao.getBoard(num);
 
@@ -45,6 +45,6 @@ public class InfoAction extends HttpServlet {
     req.setAttribute("subject", bean.getSubject());
     req.setAttribute("content", bean.getContent());
 
-    req.getRequestDispatcher("board_view.jsp").forward(req, resp);
+    req.getRequestDispatcher("WEB-INF/03_boardInfo.jsp").forward(req, resp);
   }
 }

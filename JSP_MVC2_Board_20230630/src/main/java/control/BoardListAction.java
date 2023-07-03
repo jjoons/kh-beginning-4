@@ -7,10 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.BeanDAO;
+import model.BoardDAO;
 import model.BoardBean;
 
-@WebServlet("/board_list")
+@WebServlet("/BoardListAction")
 public class BoardListAction extends HttpServlet {
   private static final long serialVersionUID = 121666636999165320L;
 
@@ -35,11 +35,11 @@ public class BoardListAction extends HttpServlet {
       count = 0;
     }
 
-    BeanDAO dao = BeanDAO.getInstance();
+    BoardDAO dao = BoardDAO.getInstance();
     List<BoardBean> list = dao.getBoards(count, page);
 
     req.setAttribute("boardList", list);
 
-    req.getRequestDispatcher("board_list.jsp").forward(req, resp);
+    req.getRequestDispatcher("WEB-INF/02_boardList.jsp").forward(req, resp);
   }
 }

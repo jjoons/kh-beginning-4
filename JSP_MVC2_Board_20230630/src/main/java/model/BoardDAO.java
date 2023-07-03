@@ -7,19 +7,19 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BeanDAO {
-  private static BeanDAO instance = null;
+public class BoardDAO {
+  private static BoardDAO instance = null;
   private Connection con = null;
   private DBConnect db = null;
 
-  private BeanDAO() {
+  private BoardDAO() {
     this.db = DBConnect.getInstance();
     this.con = this.db.getConnection(false);
   }
 
-  public static BeanDAO getInstance() {
+  public static BoardDAO getInstance() {
     if (instance == null) {
-      instance = new BeanDAO();
+      instance = new BoardDAO();
     }
 
     return instance;
@@ -56,6 +56,7 @@ public class BeanDAO {
       while (rs.next()) {
         BoardBean bean = new BoardBean();
         bean.setNum(rs.getInt("num"));
+        bean.setWriter(rs.getString("writer"));
         bean.setEmail(rs.getString("email"));
         bean.setSubject(rs.getString("subject"));
         bean.setPassword(rs.getString("password"));
@@ -86,6 +87,7 @@ public class BeanDAO {
         BoardBean bean = new BoardBean();
 
         bean.setNum(rs.getInt("num"));
+        bean.setWriter(rs.getString("writer"));
         bean.setEmail(rs.getString("email"));
         bean.setSubject(rs.getString("subject"));
         bean.setPassword(rs.getString("password"));
@@ -142,5 +144,47 @@ public class BeanDAO {
     }
 
     return -1;
+  }
+
+  // 업데이트 했을 때 저장하는 명령문
+  public void updateBoard(BoardBean bean) {
+    String sql = "UPDATE board SET subject = ?, content = ? WHERE num = ?";
+
+    try (PreparedStatement ps = this.con.prepareStatement(sql)) {
+      ps.setString(1, bean.getSubject());
+      ps.setString(2, bean.getContent());
+      ps.setInt(3, bean.getNum());
+      ps.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void deleteBoard(int num) {
+    String sql = "DELETE FROM board WHERE num = ?";
+
+    try (PreparedStatement ps = this.con.prepareStatement(sql)) {
+      ps.setInt(1, num);
+      ps.executeQuery();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void reWriteBoard(BoardBean bean) {
+    // 글 번호 (댓글을 저장할 그룹으로 사용)
+    int ref = bean.getRef();
+    // 댓글 순서 저장
+    int re_step = bean.getRe_step();
+    // 대댓글을 구별하기 위해서 들여쓰기용으로 사용한다
+    int re_level = bean.getRe_level();
+
+    String sql = "UPDATE board SET re_level = re_level + 1 WHERE ref = ?";
+
+    // 답변글 데이터 저장
+    sql = ""; // INSERT INTO board(field1, field2, ...) VALUES ()
+    // NOW(): 현재 날짜와 시간 저장
+    // ref: 부모의 ref 값을 넣는다
+    // re_step: 답글이기에 re_step을 1 더해줌
   }
 }
