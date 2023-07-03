@@ -43,7 +43,7 @@ public class ReWriteAction extends HttpServlet {
     req.setAttribute("re_step", re_step);
     req.setAttribute("re_level", re_level);
 
-    RequestDispatcher dis = req.getRequestDispatcher("BoardListAction");
+    RequestDispatcher dis = req.getRequestDispatcher("04_reWrite.jsp");
     dis.forward(req, resp);
   }
 }
