@@ -11,14 +11,12 @@
     resultClass: SQL 명령문이 실행되고 DAO 클래스로 리턴되는 데이터의 타입을 적는다
 -->
 <sqlMap namespace="com.kh.vo.GuestbookVO">
-  <insert id="insert" parameterClass="vo">INSERT INTO guestbook(idx, name,
-    password, memo, ip) values (guestbook_idx_seq.nextval, #name#, #password#, #memo#, #ip#)</insert>
-    
+  <insert id="insert" parameterClass="vo">INSERT INTO guestbook(idx, name, password, memo, ip)
+    values (guestbook_idx_seq.nextval, #name#, #password#, #memo#, #ip#)</insert>
+
   <!-- 전체 글의 개수를 얻어온다 -->
-  <select id="selectCount" resultClass="int">
-    SELECT COUNT(*) FROM guestbook
-  </select>
-  
+  <select id="selectCount" resultClass="int"> SELECT COUNT(*) FROM guestbook </select>
+
   <!-- 페이지의 글 목록을 얻어온다 -->
   <select id="selectList" parameterClass="java.util.HashMap" resultClass="vo">
     <!--
@@ -34,6 +32,60 @@
       select * from (
         select rownum rnum, TT.* from (
           select * from guestbook order by idx desc
+        ) TT where rownum <= #endNo#
+      ) where rnum >= #startNo#
+    ]]>
+  </select>
+
+  <!-- 글 1건을 얻어온다 -->
+  <select id="selectByIdx" parameterClass="int" resultClass="vo">
+    <![CDATA[
+      SELECT * FROM guestbook WHERE idx = #idx#
+    ]]>
+  </select>
+
+  <!-- 글 1건을 삭제한다 -->
+  <delete id="delete" parameterClass="int">
+    <![CDATA[
+      DELETE FROM guestbook WHERE idx = #idx#
+    ]]>
+  </delete>
+
+  <!-- 글 1건을 수정한다 -->
+  <update id="update" parameterClass="vo">
+    <![CDATA[
+      UPDATE guestbook SET name = #name#, memo = #memo#
+      WHERE idx = #idx#
+    ]]>
+  </update>
+
+  <!--
+    카테고리별 검색어를 포함하는 글의 개수를 얻어온다. 동적 쿼리 사용
+    iBatis는 기본적으로 동적 태그를 지원한다ㄴㅇ
+    isEqual 태그를 사용해서 SQL 명령의 실행 조건을 지정할 수 있다
+    property 속성에는 parameterClass로 넘어오는 조건을 비교할 필드 이름을 적는다
+    compareValue 속성에는 property 속성에 지정한 필드와 비교할 값을 적는다
+  -->
+  <select id="selectCountMulti" parameterClass="param" resultClass="int">
+    <isEqual property="category" compareValue="내용"> memo LIKE '%' || #item# || '%' </isEqual>
+    <isEqual
+      property="category" compareValue="이름"> name LIKE '%' || #item# || '%' </isEqual>
+    <isEqual
+      property="category" compareValue="내용+이름"> memo LIKE '%' || #item# || '%' AND name LIKE '%' ||
+    #item# || '%' </isEqual>
+  </select>
+
+  <!--
+    카테고리별 검색어를 포함하는 1페이지 분량의 글 목록을 얻어온다
+  -->
+  <select id="selectListMulti" parameterClass="param" resultClass="vo"> select * from ( select
+    rownum rnum, TT.* from ( select * from guestbook <isEqual property="category" compareValue="내용">
+    memo LIKE '%' || #item# || '%' </isEqual>
+          <isEqual
+      property="category" compareValue="이름"> name LIKE '%' || #item# || '%' </isEqual>
+          <isEqual
+      property="category" compareValue="내용+이름"> memo LIKE '%' || #item# || '%' AND name LIKE '%' ||
+    #item# || '%' </isEqual> ORDER BY idx DESC <![CDATA[
         ) TT where rownum <= #endNo#
       ) where rnum >= #startNo#
     ]]>

@@ -26,8 +26,32 @@
       System.err.println(e);
     }
     
+    // 카테고리와 검색어를 받는다
+    String category = request.getParameter("category");
+    String item = request.getParameter("item");
+    
+    // 넘어온 검색어가 있으면 카테고리와 검색어를 세션에 저장하고
+    // 넘어온 검색어가 없으면 세션에 저장된 객체에서 카테고리와 검색어를 읽어온다
+    
+    if (item != null) {
+      session.setAttribute("category", category);
+      item = item.trim().length() == 0 ? "" : item;
+
+      session.setAttribute("item", item);
+    } else {
+      category = (String) session.getAttribute("category");
+      item = (String) session.getAttribute("item");
+    }
+    
     // 브라우저 화면에 표시할 한 페이지 분량의 글 목록을 얻어온다
-    GuestbookList guestbookList = SelectService.getInstance().selectList(currentPage);
+    SelectService service = SelectService.getInstance();
+    GuestbookList guestbookList = null;
+    
+    if (item == null || item.trim().length() == 0) {
+      guestbookList = service.selectList(currentPage);
+    } else {
+      guestbookList = service.selectListMulti(currentPage, category, item);
+    }
     
     // 페이징 정보와 글 목록을 다음 페이지로 데이터 유지해서 이동시켜야 한다
     request.setAttribute("guestbookList", guestbookList);
