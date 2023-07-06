@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+    <select id="selectLogin" parameterClass="user_login" resultClass="int">
+        <![CDATA[
+            SELECT COUNT(*) FROM user2 WHERE user_id = #user_id# AND user_pw = #user_pw#
+        ]]>
+    </select>
+
+    <select id="selectById" parameterClass="String" resultClass="user">
+        <![CDATA[
+            SELECT * FROM user2 WHERE user_id = #user_id#
+        ]]>
+    </select>
+</sqlMap>

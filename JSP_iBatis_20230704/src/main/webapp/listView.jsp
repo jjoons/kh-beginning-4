@@ -8,6 +8,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Insert title here</title>
+  <link rel="stylesheet" href="guestbook.css" media="all" />
 </head>
 <body>
   <!-- JSTL에서 사용하는 한글 깨짐 방지 -->
