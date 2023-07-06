@@ -90,4 +90,42 @@
       ) where rnum >= #startNo#
     ]]>
   </select>
+
+  <!-- 메모(내용)필드에 검색어가 포함된 글의 개수를 얻어온다. 오라클 : like '%'||#검색어#||'%' mysql : 
+		like concat('%', #검색어# ,'%') -->
+  <select id="selectCountMemo" parameterClass="String" resultClass="int"> SELECT COUNT(*) FROM
+    guestbook WHERE memo LIKE '%' || #item# || '%' </select>
+
+  <!-- 메모 필그에 검색어가 포함된 1페이지 분량의 글 목록을 얻어온다. -->
+  <select id="selectListMemo" parameterClass="param" resultClass="vo">
+    <![CDATA[
+      select * from (
+        select rownum rnum, TT.* from (
+          select * from guestbook
+          WHERE memo LIKE '%' || #item# || '%'
+          order by idx desc
+        ) TT where rownum <= #endNo#
+      ) where rnum >= #startNo#
+    ]]>
+  </select>
+
+  <!-- name 필드 검색어가 포함된 글의 개수를 얻어온다. -->
+  <select id="selectCountName" parameterClass="String" resultClass="int"> SELECT COUNT(*) FROM
+    guestbook WHERE name LIKE '%' || #item# || '%' </select>
+
+  <!-- name 필드 검색어가 검색어가 포함된 1페이지 분량의 글 목록을 얻어온다. -->
+  <select id="selectListName" parameterClass="param" resultClass="vo">
+    <![CDATA[
+      select * from (
+        select rownum rnum, TT.* from (
+          select * from guestbook
+          WHERE name LIKE '%' || #item# || '%'
+          order by idx desc
+        ) TT where rownum <= #endNo#
+      ) where rnum >= #startNo#
+    ]]>
+  </select>
+
+  <!-- 내용하고 name 둘다 포함된 글의 개수 얻어온다. -->
+  <!-- 내용 + name 필드 검색어가 검색어가 포함된 1페이지 분량의 글 목록을 얻어온다. -->
 </sqlMap>
