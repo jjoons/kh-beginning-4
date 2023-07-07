@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <!-- 데이터베이스 연결 정보가 담 -->
+  <properties resource="com/kh/mybatis/db.properties" />
+
+  <!--
+    typeAlias
+      SQL Mapper 파일에서 parameterType이나 resultType을 지정할 때
+      긴 이름의 클래스명을 짧게 사용할 수 있도록 설정하는 태그
+      
+      별명 설정하기
+  -->
+  <typeAliases>
+    <typeAlias type="com.kh.vo.FreeBoardVO" alias="vo" />
+  </typeAliases>
+
+  <!--
+    데이터베이스 환경 정보를 설정할 때 사용한다
+    이 태그를 사용하면 여러개의 데이터베이스 접속 정보를 설정할 수 있다
+    설정된 DB 정보 중 하나를 선택해서 default 속성에 넣어서 사용한다
+    
+    <environments>: DB 연결
+      연결할 때 어떤 접속 정보로 할 것인지 지정할 수 있다
+      [default="id"]: environment 태그의 id값을 가지고 선택해서 웒하는 DB에 접속한다
+
+      <environment>: 각 데이터베이스의 관리 방식, 데이터 소스 설정에 사용한다
+        <dataSource type="POOLED">
+          MyBatis 내부에서 DB 커넥션 풀을 사용한다.
+          미리 DB 커넥션 객체를 생성해서 pool 공간에 두고 요청하면 즉시 반환한다
+          데이터베이스의 연결을 초기화하고 사용자를 인증하는 과정을 없애준 것
+          그렇게 때문에 데이터베이스 정보를 가져오는 속도가 빠르다
+        <dataSource type="UNPOOLED">
+          DB 커넥션을 요청할 때마다 커넥션 객체를 생성한다
+  -->
+  <environments default="dev">
+    <environment id="dev">
+      <transactionManager type="JDBC" />
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}" />
+        <property name="url" value="${url}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <!--
+    마이바티스 동작 방식
+      1. DAO는 SqlSessionFactory에게 SQL을 실행할 객체를 요구한다
+      2. SqlSessionFactory는 SqlSession 객체를 생성해서 반환한다
+      3. DAO가 받으면 SqlSession에게 SQL 실행 요청
+      4. SqlSession 객체는 SQL이 저장된 매퍼 파일에서 SQL을 찾는다
+      5. SqlSession JDBC 드라이버를 통해 DB에 질의
+      6. SqlSession DB로부터 가져온 데이터를 반환되는 타입의 목록으로 생성
+      7. DAO는 사용이 다 끝난 SqlSession을 닫는다
+  -->
+
+  <!-- 실행할 SQL 명령이 저장된 파일의 위치 -->
+  <mappers>
+    <mapper resource="com/kh/mybatis/freeboard.xml" />
+  </mappers>
+</configuration>
