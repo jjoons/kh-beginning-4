@@ -12,5 +12,26 @@ CREATE TABLE "FREEBOARD" (
 );
 
 delete from freeboard;
-drop sequence freeboard_idx_seq;
+-- drop sequence freeboard_idx_seq;
 create sequence freeboard_idx_seq;
+
+ALTER TABLE freeboard
+    MODIFY idx NUMBER
+    MODIFY name VARCHAR2(20)
+    MODIFY password VARCHAR2(20)
+    MODIFY hit NUMBER
+    MODIFY notice VARCHAR2(3)
+    MODIFY ip VARCHAR2(20)
+;
+
+INSERT INTO freeboard(idx, name, password, subject, content, notice, ip)
+VALUES (freeboard_idx_seq.NEXTVAL, 'ㅁㅁㅁ', '1234', '아랄랄라', '여긴 어디 나는 누구?', 'no', '127.143.14.71');
+
+COMMIT;
+
+--UPDATE FREEBOARD SET hit = (
+--  SELECT hit + 1 FROM FREEBOARD WHERE idx = 1
+--) WHERE idx = 1;
+
+SELECT * FROM freeboard;
+

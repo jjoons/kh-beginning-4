@@ -15,7 +15,6 @@ public class MySession {
 
   // 정적 초기화 블록에서 설정 파일을 읽어 객체(매퍼)를 생성한다
   static {
-
     try {
       Reader r = Resources.getResourceAsReader("com/kh/mybatis/SqlConfig.xml");
       SqlSessionFactoryBuilder build = new SqlSessionFactoryBuilder();

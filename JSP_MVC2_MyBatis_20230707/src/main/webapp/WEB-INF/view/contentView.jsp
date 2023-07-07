@@ -7,6 +7,13 @@
   <title>Insert title here</title>
 </head>
 <body>
-  
+  <div>
+    <div></div>
+    <div>${ vo.subject }</div>
+    <div>${ vo.writeDate }</div>
+    <div>${ vo.hit }</div>
+    <div>${ vo.ip }</div>
+    <div>${ vo.content }</div>
+  </div>
 </body>
 </html>

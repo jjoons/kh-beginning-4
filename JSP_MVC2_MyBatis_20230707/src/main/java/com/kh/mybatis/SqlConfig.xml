@@ -12,7 +12,7 @@
       별명 설정하기
   -->
   <typeAliases>
-    <typeAlias type="com.kh.vo.FreeBoardVO" alias="vo" />
+    <typeAlias type="com.kh.vo.FreeboardVO" alias="vo" />
   </typeAliases>
 
   <!--
