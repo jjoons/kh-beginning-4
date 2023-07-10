@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insert title here</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="js/promise01.js"></script>
+  </head>
+  <body>
+    <!--
+      Ajax (Asynchronous JavaScript and XML)
+        - 데이터를 이동하고 화면을 구성하는데 있어서 웹 화면을 갱신하지 않고
+          필요한 데이터만 서버로 보내고 가져오는 방식이다
+        - 사용자 입장에서 매우 편리하고 빠르게 작업을 처리하는 것처럼
+          느낄 수 있도록 동적 화면을 구성하는 것
+
+
+        동기: 어떤 일을 실행했을 때 그 일이 다 끝날 때까지 기다렸다가 다음 일을 실행한다
+        비동기: 어떤 일을 실행시켜놓고 다른 일들을 한다
+
+        실제 데이터들을 처리하는 (전송할 때 데이터 형식)
+
+                
+        CSV: 콤마 형태로 데이터 구별
+          - 용량이 적다
+          - 가독성이 떨어진다
+          예) 안녕,11,ss
+        XML: 태그 형식으로 데이터와 속성 구별
+          - 가독성이 좋다
+          - 용량이 크다
+          예)
+            <entries>
+              <entry id="1" name="제목">
+                내용
+              </entry>
+              <entry id="2" name="제목2">
+                내용2
+              </entry>
+            </entries>
+        JSON: 키와 값으로 구성
+          - 가독성이 좋다
+          - 용량이 적다
+          예)
+            {
+              "이서희": 20,
+              "좋아하는과일": "사과"
+            }
+            
+        데이터를 전송할 때 많이 사용하는 방식은 JSON
+
+        JSON을 이용해서 통신하려면 사용 방법을 알아야 한다
+        웹에서 자바스크립트로 생성하는 데이터는 주로 배열 또는 객체
+        배열이나 객체를 문자열로 반환을 할 때
+    -->
+  </body>
+</html>
