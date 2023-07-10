@@ -1,11 +1,11 @@
 package com.kh.vo;
 
 import java.util.ArrayList;
-import com.kh.dao.FreeboardDAO;
+import java.util.List;
 
 // 한 페이지 분량의 메인 글 목록과 페이징 작업에 사용할 8개의 변수를 기억하는 클래스
 public class FreeboardList {
-  ArrayList<FreeboardDAO> list = new ArrayList<>();
+  List<FreeboardVO> list = new ArrayList<>();
 
   private int pageSize = 10;
   private int totalCount = 0;
@@ -18,32 +18,34 @@ public class FreeboardList {
 
   public FreeboardList() {}
 
-  public FreeboardList(ArrayList<FreeboardDAO> list, int pageSize, int totalCount, int totalPage,
-      int currentPage, int startNo, int endNo, int startPage, int endPage) {
+  public FreeboardList(List<FreeboardVO> list, int pageSize, int currentPage) {
     this.list = list;
     this.pageSize = pageSize;
-    this.totalCount = totalCount;
-    this.totalPage = totalPage;
     this.currentPage = currentPage;
-    this.startNo = startNo;
-    this.endNo = endNo;
-    this.startPage = startPage;
-    this.endPage = endPage;
+    this.calculate();
   }
 
   public void calculate() {
     this.totalCount = this.list.size();
     this.totalPage =
         this.totalCount / this.pageSize + (this.totalCount % this.pageSize > 0 ? 1 : 0);
-    this.startPage = this.totalPage / this.pageSize;
+    this.startPage = (this.currentPage - 1) / this.pageSize * this.pageSize + 1;
+    this.endPage = this.startPage + this.pageSize - 1;
+    this.endPage = this.endPage > this.totalPage ? this.totalPage : this.endPage;
     this.currentPage = this.currentPage > this.totalPage ? this.totalPage : this.currentPage;
+    this.startNo = (this.currentPage - 1) / this.pageSize;
+    this.endNo = this.startNo + this.pageSize - 1;
+
+    if (this.endNo > this.totalCount) {
+      this.endNo = this.totalCount;
+    }
   }
 
-  public ArrayList<FreeboardDAO> getList() {
+  public List<FreeboardVO> getList() {
     return list;
   }
 
-  public void setList(ArrayList<FreeboardDAO> list) {
+  public void setList(List<FreeboardVO> list) {
     this.list = list;
   }
 
@@ -53,6 +55,7 @@ public class FreeboardList {
 
   public void setPageSize(int pageSize) {
     this.pageSize = pageSize;
+    this.calculate();
   }
 
   public int getTotalCount() {
@@ -61,14 +64,11 @@ public class FreeboardList {
 
   public void setTotalCount(int totalCount) {
     this.totalCount = totalCount;
+    this.calculate();
   }
 
   public int getTotalPage() {
     return totalPage;
-  }
-
-  public void setTotalPage(int totalPage) {
-    this.totalPage = totalPage;
   }
 
   public int getCurrentPage() {
@@ -77,38 +77,23 @@ public class FreeboardList {
 
   public void setCurrentPage(int currentPage) {
     this.currentPage = currentPage;
+    this.calculate();
   }
 
   public int getStartNo() {
     return startNo;
   }
 
-  public void setStartNo(int startNo) {
-    this.startNo = startNo;
-  }
-
   public int getEndNo() {
     return endNo;
-  }
-
-  public void setEndNo(int endNo) {
-    this.endNo = endNo;
   }
 
   public int getStartPage() {
     return startPage;
   }
 
-  public void setStartPage(int startPage) {
-    this.startPage = startPage;
-  }
-
   public int getEndPage() {
     return endPage;
-  }
-
-  public void setEndPage(int endPage) {
-    this.endPage = endPage;
   }
 
   @Override

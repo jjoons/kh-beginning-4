@@ -18,7 +18,7 @@ public class FreeboardDAO {
   }
 
   public List<FreeboardVO> getBoards(SqlSession mapper) {
-    return (List<FreeboardVO>) mapper.selectList("selectGetBoards");
+    return mapper.<FreeboardVO>selectList("selectGetBoards");
   }
 
   public int insert(SqlSession mapper, FreeboardVO vo) {
@@ -37,5 +37,9 @@ public class FreeboardDAO {
     }
 
     return result;
+  }
+
+  public int addDummy(SqlSession session, int count) {
+    return session.insert("insertDummy");
   }
 }

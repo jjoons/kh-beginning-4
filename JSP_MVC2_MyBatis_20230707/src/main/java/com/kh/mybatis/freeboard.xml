@@ -26,6 +26,14 @@
     ]]>
   </update>
   
+  <insert id="insertDummy">
+    <![CDATA[
+      INSERT INTO freeboard(idx, name, password, subject, content, notice, ip)
+      VALUES (freeboard_idx_seq.NEXTVAL, '더미', '1234', '더미' || freeboard_idx_seq.NEXTVAL,
+        '더미 게시글입니다', 'no', '127.0.0.1')
+    ]]>
+  </insert>
+  
   <resultMap type="com.kh.vo.FreeboardVO" id="getBoardsList">
     <result column="WRITEDATE" property="writeDate" />
   </resultMap>

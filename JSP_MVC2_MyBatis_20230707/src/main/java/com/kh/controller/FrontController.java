@@ -13,7 +13,7 @@ public class FrontController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private String urlPrefix = "/JSP_MVC2_MyBatis_20230707";
   private String extensionName = ".do";
-  private Map<String, Controller> list = ControllerMap.getList();
+  private Map<String, Controller> list = RoutingMap.getList();
 
   protected void doAction(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
@@ -27,7 +27,12 @@ public class FrontController extends HttpServlet {
 
       if (con != null) {
         String actionUrl = con.action(req, resp);
-        req.getRequestDispatcher("WEB-INF/view" + actionUrl).forward(req, resp);
+
+        if (actionUrl != null) {
+          req.getRequestDispatcher("WEB-INF/view" + actionUrl).forward(req, resp);
+        } else {
+          this.doDefault(req, resp);
+        }
       } else {
         this.doDefault(req, resp);
       }
