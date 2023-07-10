@@ -2,7 +2,6 @@
   "singleQuote": true,
   "printWidth": 100,
   "trailingComma": "all",
-  "tabWidth": 2,
-  "endOfLine": "auto",
-  "semi": false
+  "semi": false,
+  "editorconfig": true
 }
