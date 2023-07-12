@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dao.AccountDAO;
+import service.AccountService;
+import service.ServiceResponseCode;
 
 @WebServlet("/register_api/check_duplicate_id")
 public class RegisterAPICheckDuplicateIdController extends HttpServlet {
@@ -25,26 +26,24 @@ public class RegisterAPICheckDuplicateIdController extends HttpServlet {
 
     String id = req.getHeader("X-ID");
 
-    if (id != null && !id.isEmpty()) {
-      int result = AccountDAO.getInstance().checkDuplicateId(id);
+    int result = AccountService.checkValidId(id);
 
-      if (result == 0) {
-        jsonMap.replace("isAvailable", true);
-      } else if (result > 0) {
-        resp.setStatus(409);
-        jsonMap.put("message", "이미 사용 중인 아이디입니다.");
-      } else {
-        resp.setStatus(500);
-        jsonMap.put("message", "내부 서버 오류입니다.");
-      }
+    if (result == ServiceResponseCode.ID_VALID.value()) {
+      jsonMap.replace("isAvailable", true);
     } else {
       resp.setStatus(400);
-      jsonMap.put("message", "Header가 없습니다.");
+      String message = ServiceResponseCode.getMessageByValue(result);
+      jsonMap.put("message", message);
     }
 
     resp.setContentType("application/json; charset=UTF-8");
-    OutputStream os = resp.getOutputStream();
-    mapper.writeValue(os, jsonMap);
+
+    try {
+      OutputStream os = resp.getOutputStream();
+      mapper.writeValue(os, jsonMap);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override

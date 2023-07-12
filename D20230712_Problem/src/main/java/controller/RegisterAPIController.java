@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.AccountDAO;
 import dto.AccountDTO;
+import service.AccountService;
+import service.ServiceResponseCode;
 
 @WebServlet("/register_api")
 public class RegisterAPIController extends HttpServlet {
@@ -38,41 +40,33 @@ public class RegisterAPIController extends HttpServlet {
       age = Integer.parseInt(ageStr);
     } catch (NumberFormatException e) {}
 
-    AccountDTO dto = this.getAccountDTO(id, password, password_re, name, age, gender, email);
+    AccountDTO dto = AccountDTO.builder().id(id).password(password).name(name).age(age)
+        .gender(gender).email(email).build();
+    int validResult = AccountService.checkValidAccount(dto);
 
-    if (dto != null) {
+    if (validResult == ServiceResponseCode.ACCOUNT_VALID.value()) {
       int result = AccountDAO.getInstance().insertAccount(dto);
 
       if (result > 0) {
         jsonMap.replace("success", true);
       } else {
         resp.setStatus(409);
-        jsonMap.put("message", "오류가 발생했습니다.");
+        String message = ServiceResponseCode.UNKNOWN_ERROR.message();
+        jsonMap.put("message", message);
+
         System.out.println("RegisterAPIController");
         System.out.println(dto);
       }
     } else {
       resp.setStatus(400);
-      jsonMap.put("message", "일부 파라미터가 없거나 값이 올바르지 않습니다.");
+      String message = ServiceResponseCode.getMessageByValue(validResult);
+
+      jsonMap.put("message", message);
     }
 
     resp.setContentType("application/json; charset=UTF-8");
     Writer writer = resp.getWriter();
     mapper.writeValue(writer, jsonMap);
-  }
-
-  private AccountDTO getAccountDTO(String id, String password, String password_re, String name,
-      int age, String gender, String email) {
-    if (id != null && !id.isEmpty() && id.matches("[a-zA-Z0-9]{1,20}")
-        && AccountDAO.getInstance().checkDuplicateId(id) == 0 && password != null
-        && !password.isEmpty() && password_re != null && !password_re.isEmpty()
-        && password.equals(password_re) && name != null && !name.isEmpty() && age > -1
-        && gender != null && !gender.isEmpty() && email != null && !email.isEmpty()) {
-      return AccountDTO.builder().id(id).password(password).name(name).age(age).gender(gender)
-          .email(email).build();
-    }
-
-    return null;
   }
 
   @Override

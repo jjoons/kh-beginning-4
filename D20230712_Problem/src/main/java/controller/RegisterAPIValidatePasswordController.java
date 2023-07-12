@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import service.AccountService;
+import service.ServiceResponseCode;
 
 @WebServlet("/register_api/validate_password")
 public class RegisterAPIValidatePasswordController extends HttpServlet {
@@ -25,20 +27,24 @@ public class RegisterAPIValidatePasswordController extends HttpServlet {
 
     jsonMap.put("isValid", false);
 
-    if (password != null && !password.isEmpty() && password_re != null && !password_re.isEmpty()) {
-      if (password.equals(password_re)) {
-        jsonMap.replace("isValid", true);
-      } else {
-        resp.setStatus(400);
-        jsonMap.put("message", "비밀번호가 일치하지 않거나 조건에 맞지 않습니다.");
-      }
+    int validResult = AccountService.checkValidPassword(password, password_re);
+
+    if (validResult == ServiceResponseCode.PASSWORD_VALID.value()) {
+      jsonMap.replace("isValid", true);
     } else {
       resp.setStatus(400);
-      jsonMap.put("message", "일부 파라미터가 없습니다.");
+      String message = ServiceResponseCode.getMessageByValue(validResult);
+
+      jsonMap.put("message", message);
     }
 
     resp.setContentType("application/json; charset=UTF-8");
-    var os = resp.getOutputStream();
-    mapper.writeValue(os, jsonMap);
+
+    try {
+      var os = resp.getOutputStream();
+      mapper.writeValue(os, jsonMap);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }
