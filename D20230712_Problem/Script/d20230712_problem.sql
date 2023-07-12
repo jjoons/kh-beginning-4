@@ -1,0 +1,18 @@
+CREATE SEQUENCE d20230712_problem_pk;
+
+CREATE TABLE d20230712_problem (
+    no NUMBER DEFAULT d20230712_problem_pk.NEXTVAL PRIMARY KEY,
+    id VARCHAR2(30) UNIQUE NOT NULL,
+    password VARCHAR2(64) NOT NULL,
+    name VARCHAR2(50) NOT NULL,
+    age NUMBER NOT NULL,
+    gender VARCHAR2(6) NOT NULL,
+    email VARCHAR2(50) NOT NULL
+);
+
+ALTER TABLE D20230712_PROBLEM ADD regdate TIMESTAMP DEFAULT SYSDATE NOT NULL;
+
+INSERT INTO d20230712_problem(id, password, name, age, gender, email)
+VALUES ('asdf', '1234', '이름', 20, 'male', 'a@example.com');
+
+COMMIT;

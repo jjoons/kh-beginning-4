@@ -50,7 +50,9 @@ public class AjaxDAO {
     String sql = "SELECT * FROM ajax WHERE name LIKE '%' || ? || '%'";
 
     try (PreparedStatement ps = this.con.prepareStatement(sql)) {
+      searchString = searchString.replace("%", "%25");
       ps.setString(1, searchString);
+
       ResultSet rs = ps.executeQuery();
 
       while (rs.next()) {

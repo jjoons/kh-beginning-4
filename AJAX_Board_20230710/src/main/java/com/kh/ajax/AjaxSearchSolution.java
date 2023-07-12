@@ -48,7 +48,7 @@ public class AjaxSearchSolution extends HttpServlet {
     }
 
     // 테이블에서 입력한 문자열이 name 필드에 포함 된 데이터를 얻어온다. 
-    ArrayList<AjaxDTO> list = new AjaxDAO().search(name);
+    ArrayList<AjaxDTO> list = AjaxDAO.getInstance().getsearch(name);
 
     // 테이블에서 검색해 얻어온 데이터를 json 형식의 문자열로 만든다.
     StringBuffer result = new StringBuffer();
