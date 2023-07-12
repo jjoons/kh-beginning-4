@@ -8,11 +8,11 @@ public enum ServiceResponseCode {
   PASSWORD_PARAMETER_NULL(-13, "비밀번호 파라미터가 지정되지 않았습니다."),
   PASSWORD_EMPTY(-11, "비밀번호가 비어있습니다."),
   PASSWORD_MISMATCH(-12, "비밀번호와 재입력 비밀번호가 일치하지 않습니다."),
-  PASSWORD_MISMATCH_CONDITIONAL(-13, "비밀번호가 조건과 일치하지 않습니다."),
+  PASSWORD_MISMATCH_CONDITIONAL(-13, AccountService.PASSWORD_INVALID_MESSAGE),
 
   ID_VALID(20, "사용 가능한 아이디입니다."),
   ID_EMPTY(-21, "아이디가 비어있습니다."),
-  ID_MISMATCH_CONDITIONAL(-22, "아이디가 조건과 일치하지 않습니다."),
+  ID_MISMATCH_CONDITIONAL(-22, AccountService.ID_INVALID_MESSAGE),
   ID_DUPLICATE(-23, "중복된 아이디입니다."),
   ID_PARAMETER_NULL(-24, "아이디 파라미터가 지정되지 않았습니다."),
 
