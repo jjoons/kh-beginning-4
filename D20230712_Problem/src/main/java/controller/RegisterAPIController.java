@@ -45,17 +45,26 @@ public class RegisterAPIController extends HttpServlet {
     int validResult = AccountService.checkValidAccount(dto);
 
     if (validResult == ServiceResponseCode.ACCOUNT_VALID.value()) {
-      int result = AccountDAO.getInstance().insertAccount(dto);
+      validResult = AccountService.checkValidPassword(password, password_re);
 
-      if (result > 0) {
-        jsonMap.replace("success", true);
+      if (validResult == ServiceResponseCode.PASSWORD_VALID.value()) {
+        int result = AccountDAO.getInstance().insertAccount(dto);
+
+        if (result > 0) {
+          jsonMap.replace("success", true);
+        } else {
+          resp.setStatus(409);
+          String message = ServiceResponseCode.UNKNOWN_ERROR.message();
+          jsonMap.put("message", message);
+
+          System.out.println("RegisterAPIController");
+          System.out.println(dto);
+        }
       } else {
-        resp.setStatus(409);
-        String message = ServiceResponseCode.UNKNOWN_ERROR.message();
-        jsonMap.put("message", message);
+        resp.setStatus(400);
+        String message = ServiceResponseCode.getMessageByValue(validResult);
 
-        System.out.println("RegisterAPIController");
-        System.out.println(dto);
+        jsonMap.put("message", message);
       }
     } else {
       resp.setStatus(400);
